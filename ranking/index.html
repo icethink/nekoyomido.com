@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ねこ運勢ランキング | 星座×血液型・48匹の猫が毎日順位変動 | ねこよみ堂</title>
+<meta name="description" content="星座×血液型で48匹。きょうのあなたは何位？毎日0時に入れかわる、猫たちの運勢ランキング。無料・登録不要。">
+<meta property="og:title" content="ねこ運勢ランキング | きょうのあなたは48匹中なん位？">
+<meta property="og:description" content="星座×血液型の48匹が、毎日順位変動。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nekoyomido.com/assets/img/og_ranking.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1a15; --bg2:#122019; --panel:#17281f;
+  --ink:#e9dfc6; --sub:#a89f88; --mist:#8fa596;
+  --gold:#c9a961; --gold-hi:#e5cd8f; --gold-dim:#7d6a45; --gold-soft:rgba(201,169,97,.12);
+  --line:#33453a; --rose:#c98598;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(233,220,180,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 12%, rgba(233,220,180,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 34%, rgba(233,220,180,.20) 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 64%, rgba(233,220,180,.18) 50%, transparent 51%),
+    radial-gradient(ellipse 140% 70% at 50% -20%, rgba(78,138,106,.18) 0%, transparent 60%);
+  color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.9;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Shippori Mincho',serif;font-weight:600;letter-spacing:.08em}
+.en{font-family:'Uncial Antiqua',serif;color:var(--gold);letter-spacing:.35em}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:rgba(14,26,21,.85)}
+.head-in{max-width:680px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Shippori Mincho',serif;font-size:1.2rem;letter-spacing:.2em;color:var(--ink);text-decoration:none}
+.logo small{font-family:'Uncial Antiqua',serif;font-size:.58rem;color:var(--gold);letter-spacing:.3em;display:block}
+nav a{font-size:.8rem;color:var(--mist);text-decoration:none;margin-left:18px}
+nav a:hover{color:var(--gold-hi)}
+.crumb{max-width:680px;margin:0 auto;padding:10px 20px 0;font-size:.72rem;color:var(--sub)}
+.crumb a{color:var(--gold);text-decoration:none}
+.hero{text-align:center;padding:50px 0 28px}
+.hero .en{font-size:.72rem;margin-bottom:16px;display:block}
+.hero h1{font-size:1.55rem;line-height:1.8;margin-bottom:12px;color:var(--gold-hi);text-shadow:0 0 24px rgba(201,169,97,.25)}
+.hero p{color:var(--sub);font-size:.9rem;max-width:32em;margin:0 auto}
+.rule{display:flex;align-items:center;gap:14px;color:var(--gold);font-size:.78rem;letter-spacing:.35em;margin:46px 0 24px;justify-content:center}
+.rule::before,.rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-dim))}
+.rule::after{background:linear-gradient(90deg,var(--gold-dim),transparent)}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--gold-dim);border-radius:3px;padding:34px 28px;position:relative;box-shadow:inset 0 0 60px rgba(0,0,0,.35)}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,169,97,.25);border-radius:2px;pointer-events:none}
+.btn{display:inline-block;background:linear-gradient(180deg,#dabf78,#a2803e);color:#181206;border:1px solid var(--gold-hi);border-radius:2px;padding:14px 44px;font-size:.98rem;letter-spacing:.2em;cursor:pointer;font-family:'Shippori Mincho',serif;transition:.25s;box-shadow:0 0 24px rgba(201,169,97,.18)}
+.btn:hover{box-shadow:0 0 34px rgba(201,169,97,.4);transform:translateY(-1px)}
+.center{text-align:center}
+.hidden{display:none}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:420px;margin:0 auto 22px}
+.pick label{font-size:.72rem;color:var(--sub);letter-spacing:.15em;display:block;margin-bottom:6px}
+select{width:100%;padding:11px 12px;border:1px solid var(--gold-dim);border-radius:3px;background:#122019;color:var(--ink);font-size:.9rem;font-family:inherit}
+/* result */
+.r-date{font-size:.72rem;color:var(--gold);letter-spacing:.35em;text-align:center;margin-bottom:6px}
+.r-signimg{width:150px;margin:0 auto 10px}
+.r-signimg img{width:100%;border-radius:8px;border:1px solid var(--gold-dim);box-shadow:0 0 22px rgba(201,169,97,.2)}
+.r-rank{font-family:'Shippori Mincho',serif;font-size:3.6rem;text-align:center;color:var(--gold-hi);text-shadow:0 0 30px rgba(201,169,97,.35);line-height:1.3}
+.r-rank small{font-size:1.1rem;color:var(--sub)}
+.r-combo{text-align:center;color:var(--ink);font-size:.95rem;letter-spacing:.1em;margin-bottom:4px;font-family:'Shippori Mincho',serif}
+.r-ep{text-align:center;color:var(--sub);font-size:.8rem;margin-bottom:18px}
+.r-tier{font-size:.95rem;max-width:30em;margin:0 auto 20px;text-align:center;line-height:2.05}
+.orows{border-top:1px solid var(--line);max-width:420px;margin:0 auto}
+.orow{display:grid;grid-template-columns:8.5em 1fr;gap:14px;padding:11px 4px;border-bottom:1px solid var(--line);font-size:.88rem}
+.orow b{font-family:'Shippori Mincho',serif;color:var(--gold);font-weight:600;letter-spacing:.15em;font-size:.8rem}
+.share{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.share a{border-radius:2px;padding:11px 26px;font-size:.85rem;text-decoration:none;cursor:pointer;border:1px solid var(--gold-dim);background:transparent;color:var(--ink);transition:.2s}
+.share a:hover{border-color:var(--gold);background:var(--gold-soft)}
+.share .line{background:#06c755;color:#fff;border-color:#06c755}
+/* list */
+.rk-list{border-top:1px solid var(--line)}
+.rk-row{display:grid;grid-template-columns:3.4em 1fr auto;gap:10px;align-items:center;padding:9px 8px;border-bottom:1px solid var(--line);font-size:.85rem}
+.rk-row .no{font-family:'Shippori Mincho',serif;color:var(--gold);letter-spacing:.05em}
+.rk-row .bt{color:var(--sub);font-size:.75rem}
+.rk-row.top1{background:var(--gold-soft);border-left:3px solid var(--gold)}
+.rk-row.me{background:rgba(78,138,106,.16);border-left:3px solid #4e8a6a}
+.rk-row.me .no::after{content:" ← あなた";font-size:.7rem;color:#8fc9a8;font-family:'Noto Sans JP',sans-serif}
+.ad-slot{border:1px dashed var(--gold-dim);border-radius:3px;min-height:100px;display:flex;align-items:center;justify-content:center;color:#5d6a58;font-size:.7rem;letter-spacing:.25em;margin:32px 0;background:rgba(23,40,31,.5)}
+footer{border-top:1px solid var(--line);margin-top:52px;padding:36px 0 46px;color:var(--sub);font-size:.76rem}
+footer a{color:var(--gold)}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--gold)}
+@media(max-width:480px){.pick{grid-template-columns:1fr}.r-rank{font-size:2.8rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <a class="logo" href="../">ねこよみ堂<small>nekoyomido</small></a>
+    <nav>
+      <a href="../">うらないTOP</a>
+      <a href="../omikuji/">おみくじ</a>
+      <a href="../necogram/">ネコグラム</a>
+    </nav>
+  </div>
+</header>
+<div class="crumb"><a href="../">ねこよみ堂</a> ＞ ねこ運勢ランキング</div>
+
+<main class="wrap">
+
+  <div class="hero">
+    <span class="en">daily cat ranking</span>
+    <h1>ねこ運勢ランキング</h1>
+    <p>星座×血液型で、森には48匹の猫がいます。順位は毎日0時にがらりと入れかわり。きょうのあなたは、なん位でしょう？</p>
+  </div>
+
+  <div class="card">
+    <div class="pick">
+      <div><label>あなたの星座</label><select id="sel-sign"></select></div>
+      <div><label>あなたの血液型</label><select id="sel-blood"></select></div>
+    </div>
+    <div class="center"><button class="btn" onclick="show()">きょうの順位をみる</button></div>
+
+    <div id="result" class="hidden" style="margin-top:30px">
+      <div class="r-date" id="r-date"></div>
+      <div class="r-signimg"><img id="r-simg" alt=""></div>
+      <div class="r-rank"><span id="r-no"></span><small> 位</small><small style="font-size:.85rem"> / 48匹中</small></div>
+      <div class="r-combo" id="r-combo"></div>
+      <div class="r-ep" id="r-ep"></div>
+      <p class="r-tier" id="r-tier"></p>
+      <div class="orows">
+        <div class="orow"><b>きょうのたからもの</b><span id="r-item"></span></div>
+        <div class="orow"><b>きょうの色</b><span id="r-color"></span></div>
+        <div class="orow"><b>ラッキーにゃんこ</b><span id="r-cat"></span></div>
+      </div>
+      <div class="share" id="r-share"></div>
+    </div>
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot">AD SPACE</div>
+
+  <div class="rule">きょうの全順位</div>
+  <div class="card" style="padding:22px 18px">
+    <div class="rk-list" id="rk-list"></div>
+    <p style="font-size:.75rem;color:var(--sub);margin-top:12px;text-align:center">順位は日本時間の0時に、森の猫会議できまります（毎日総入れかえ）。</p>
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot">AD SPACE</div>
+
+  <div class="rule">このランキングについて</div>
+  <div class="card" style="font-size:.9rem">
+    <p>ねこ運勢ランキングは、星座×血液型の48匹の猫たちが毎日順位を入れかえる、日がわりの運勢ランキングです。きょう48位でも、あしたは1位かもしれません。最下位の猫には、森のみんながおやつを分けてくれるならわしです。</p>
+    <p style="margin-top:10px;color:var(--sub);font-size:.8rem">※順位は日付から機械的にきまる、みんなに公平な「くじ」です。えらんだ星座・血液型はお使いの端末にだけ記録されます。</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="font-family:'Shippori Mincho',serif;font-size:1.1rem;letter-spacing:.2em">ねこよみ堂</div>
+    <p style="margin-top:10px">ねこ運勢ランキングは、猫の占いやかた「<a href="../">ねこよみ堂</a>」のコンテンツです。</p>
+    <details>
+      <summary>免責事項・プライバシーポリシー</summary>
+      <p style="margin-top:8px">本サイトの占いはエンターテインメント目的のコンテンツです。選択内容はブラウザ内にのみ保存され、サーバーへは送信されません。本サイトでは第三者配信の広告サービス（Google AdSense等）を利用しています。パーソナライズ広告は<a href="https://adssettings.google.com">広告設定</a>から無効化できます。</p>
+    </details>
+    <p style="margin-top:20px">© 2026 ねこよみ堂</p>
+  </div>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const SIGNS=[
+ {n:"おひつじ座",e:"突撃の火猫",img:"aries"},{n:"おうし座",e:"のんびり草原猫",img:"taurus"},{n:"ふたご座",e:"おしゃべり風猫",img:"gemini"},
+ {n:"かに座",e:"家守りの月猫",img:"cancer"},{n:"しし座",e:"太陽のたてがみ猫",img:"leo"},{n:"おとめ座",e:"きれいずきの露猫",img:"virgo"},
+ {n:"てんびん座",e:"つりあい上手の風猫",img:"libra"},{n:"さそり座",e:"ひとすじの淵猫",img:"scorpio"},{n:"いて座",e:"遠くをめざす矢猫",img:"sagittarius"},
+ {n:"やぎ座",e:"こつこつ山猫",img:"capricorn"},{n:"みずがめ座",e:"じゆうな星猫",img:"aquarius"},{n:"うお座",e:"ゆめみる水猫",img:"pisces"}
+];
+const BLOODS=[{n:"A型",e:"きちょうめん"},{n:"B型",e:"わがみち"},{n:"O型",e:"おおらか"},{n:"AB型",e:"ふしぎ"}];
+const TIERS=[
+ [1,1,"きょうの森の王さま！なにをしても、だいたいうまくいく日。ひとにやさしくすると、運はさらに長もちします。"],
+ [2,5,"堂々の上位グループ。追い風がふいています。きょうは「やろうか迷っていたこと」に手をつける日です。"],
+ [6,12,"日なた組。こまかい幸運がぽつぽつ落ちてくる日なので、下を向いて歩くと拾えます。"],
+ [13,24,"おだやかな中位。ふだんどおりが、いちばんの開運。いつものごはん、いつもの道が味方です。"],
+ [25,36,"すこし雲がかかる位置。あわてなければ、なにも問題ありません。判断はゆっくり、返事はていねいに。"],
+ [37,47,"きょうは充電組。がんばる日ではなく、そなえる日。あたたかいものをのんで、はやめにお布団へ。"],
+ [48,48,"きょうの48位、おめでとうございます！森のならわしで、みんながおやつを分けてくれる救済デー。あしたの1位候補です。"]
+];
+const ITEMS=["ねこじゃらし","まるいクッション","あたたかいミルク","銀のスプーン","みどりの小石","ふるい本","木のくし","白い羽根","ちいさな鈴","月あかり","湯たんぽ","ハーブティー","かぎしっぽのお守り","窓辺の植物"];
+const COLORS=["月白（げっぱく）","深緑（ふかみどり）","金茶（きんちゃ）","菫色（すみれいろ）","茜（あかね）","銀鼠（ぎんねず）","琥珀（こはく）","若草（わかくさ）","藍（あい）","桜鼠（さくらねず）"];
+const LCATS=["三毛猫","黒猫","白猫","はちわれ猫","茶トラ猫","サバトラ猫","靴下猫","かぎしっぽ猫"];
+/* ================= LOGIC ================= */
+const MKEY="nekorank_me";
+function seedNum(){const d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function todayRanks(){
+  // rankOf[comboIdx] = きょうの順位(1-48)。日付シードなので全員おなじ表になる
+  const rng=mulberry32(seedNum());
+  const arr=[...Array(48).keys()];
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  const rankOf=new Array(48);
+  arr.forEach((combo,pos)=>rankOf[combo]=pos+1);
+  return rankOf;
+}
+function tierText(rank){
+  for(const[a,b,t]of TIERS)if(rank>=a&&rank<=b)return t;
+  return TIERS[3][2];
+}
+function comboName(s,b){return SIGNS[s].n+" × "+BLOODS[b].n;}
+function comboEp(s,b){return "『"+BLOODS[b].e+"な"+SIGNS[s].e+"』";}
+function luckyOf(idx){
+  const rng=mulberry32(seedNum()^Math.imul(idx+1,2654435761));
+  return {item:ITEMS[Math.floor(rng()*ITEMS.length)],
+          color:COLORS[Math.floor(rng()*COLORS.length)],
+          cat:LCATS[Math.floor(rng()*LCATS.length)]};
+}
+const $=id=>document.getElementById(id);
+function show(){
+  const s=+$("sel-sign").value,b=+$("sel-blood").value;
+  try{localStorage.setItem(MKEY,JSON.stringify({s:s,b:b}));}catch(e){}
+  const idx=s*4+b;
+  const rank=todayRanks()[idx];
+  const lucky=luckyOf(idx);
+  const d=new Date();
+  $("r-date").textContent=d.getFullYear()+"."+String(d.getMonth()+1).padStart(2,"0")+"."+String(d.getDate()).padStart(2,"0")+" のランキング";
+  $("r-no").textContent=rank;
+  $("r-simg").src="../assets/img/sign_"+SIGNS[s].img+".webp";
+  $("r-combo").textContent=comboName(s,b);
+  $("r-ep").textContent=comboEp(s,b);
+  $("r-tier").textContent=tierText(rank);
+  $("r-item").textContent=lucky.item;
+  $("r-color").textContent=lucky.color;
+  $("r-cat").textContent=lucky.cat+"を見かけたら、いいことあるかも";
+  const url=location.origin+location.pathname;
+  const text="きょうのねこ運勢ランキング、私（"+comboName(s,b)+"）は48匹中 "+rank+"位でした🐾 #ねこ運勢ランキング #ねこよみ堂";
+  $("r-share").innerHTML=
+   '<a href="https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url)+'" target="_blank" rel="noopener">𝕏 でシェア</a>'
+   +'<a class="line" href="https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text)+'" target="_blank" rel="noopener">LINEで送る</a>';
+  $("result").classList.remove("hidden");
+  renderList(idx);
+}
+function renderList(myIdx){
+  const rankOf=todayRanks();
+  const rows=new Array(48);
+  rankOf.forEach((rank,combo)=>{rows[rank-1]=combo;});
+  $("rk-list").innerHTML=rows.map((combo,i)=>{
+    const s=Math.floor(combo/4),b=combo%4;
+    const cls=(i===0?"top1 ":"")+(combo===myIdx?"me":"");
+    return '<div class="rk-row '+cls+'"><span class="no">'+(i+1)+'位</span><span>'+comboName(s,b)+'</span><span class="bt">'+BLOODS[b].e+'な'+SIGNS[s].e+'</span></div>';
+  }).join("");
+}
+/* ================= BOOT ================= */
+(function(){
+  SIGNS.forEach((x,i)=>$("sel-sign").add(new Option(x.n,i)));
+  BLOODS.forEach((x,i)=>$("sel-blood").add(new Option(x.n,i)));
+  let me=null;
+  try{me=JSON.parse(localStorage.getItem(MKEY)||"null");}catch(e){}
+  if(me&&SIGNS[me.s]&&BLOODS[me.b]){
+    $("sel-sign").value=me.s;$("sel-blood").value=me.b;
+    show();
+  }else{
+    renderList(-1);
+  }
+})();
+</script>
+</body>
+<!-- NEKOYOMIDO ranking v1.0 -->
+</html>

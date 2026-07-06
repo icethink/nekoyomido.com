@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ねこの森カード | 1日1枚、森からのしらせ（全36枚） | ねこよみ堂</title>
+<meta name="description" content="森の猫たちがつたえる36枚の絵札から、1日1枚。きょうのあなたへのしらせを、めくって受けとりましょう。無料・登録不要。">
+<meta property="og:title" content="ねこの森カード | 1日1枚、森からのしらせ">
+<meta property="og:description" content="36枚の猫の絵札から、きょうの1枚を。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nekoyomido.com/assets/img/og_cards.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1a15; --bg2:#122019; --panel:#17281f;
+  --ink:#e9dfc6; --sub:#a89f88; --mist:#8fa596;
+  --gold:#c9a961; --gold-hi:#e5cd8f; --gold-dim:#7d6a45; --gold-soft:rgba(201,169,97,.12);
+  --line:#33453a; --rose:#c98598;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(233,220,180,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 12%, rgba(233,220,180,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 34%, rgba(233,220,180,.20) 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 64%, rgba(233,220,180,.18) 50%, transparent 51%),
+    radial-gradient(ellipse 140% 70% at 50% -20%, rgba(78,138,106,.18) 0%, transparent 60%);
+  color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.9;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Shippori Mincho',serif;font-weight:600;letter-spacing:.08em}
+.en{font-family:'Uncial Antiqua',serif;color:var(--gold);letter-spacing:.35em}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:rgba(14,26,21,.85)}
+.head-in{max-width:680px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Shippori Mincho',serif;font-size:1.2rem;letter-spacing:.2em;color:var(--ink);text-decoration:none}
+.logo small{font-family:'Uncial Antiqua',serif;font-size:.58rem;color:var(--gold);letter-spacing:.3em;display:block}
+nav a{font-size:.8rem;color:var(--mist);text-decoration:none;margin-left:18px}
+nav a:hover{color:var(--gold-hi)}
+.crumb{max-width:680px;margin:0 auto;padding:10px 20px 0;font-size:.72rem;color:var(--sub)}
+.crumb a{color:var(--gold);text-decoration:none}
+.hero{text-align:center;padding:50px 0 26px}
+.hero .en{font-size:.72rem;margin-bottom:16px;display:block}
+.hero h1{font-size:1.55rem;line-height:1.8;margin-bottom:12px;color:var(--gold-hi);text-shadow:0 0 24px rgba(201,169,97,.25)}
+.hero p{color:var(--sub);font-size:.9rem;max-width:32em;margin:0 auto}
+.rule{display:flex;align-items:center;gap:14px;color:var(--gold);font-size:.78rem;letter-spacing:.35em;margin:46px 0 24px;justify-content:center}
+.rule::before,.rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-dim))}
+.rule::after{background:linear-gradient(90deg,var(--gold-dim),transparent)}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--gold-dim);border-radius:3px;padding:34px 28px;position:relative;box-shadow:inset 0 0 60px rgba(0,0,0,.35)}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,169,97,.25);border-radius:2px;pointer-events:none}
+.center{text-align:center}
+.hidden{display:none}
+/* flip card */
+.deck{perspective:1200px;width:190px;height:290px;margin:6px auto 18px;cursor:pointer}
+.flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.2,.7,.3,1)}
+.flip.done{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:6px;border:1.5px solid var(--gold);overflow:hidden}
+.face.back{background:
+  radial-gradient(circle at 50% 50%, rgba(201,169,97,.16) 0%, transparent 55%),
+  linear-gradient(160deg,#1c3024,#122019)}
+.face.front{background:#0a120e;transform:rotateY(180deg);padding:0}
+.face.back::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,169,97,.4);border-radius:4px;pointer-events:none}
+.face.front img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.face.front .caption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(10,18,14,.92),transparent);padding:26px 8px 8px;text-align:center}
+.cardname{font-family:'Shippori Mincho',serif;font-size:1.05rem;color:var(--gold-hi);letter-spacing:.14em;line-height:1.5;text-shadow:0 0 14px rgba(10,18,14,.9)}
+.cardno{font-family:'Uncial Antiqua',serif;color:var(--gold);font-size:.6rem;letter-spacing:.3em}
+.deck-hint{text-align:center;color:var(--sub);font-size:.85rem;margin-bottom:8px}
+@keyframes breathe{0%,100%{box-shadow:0 0 18px rgba(201,169,97,.15)}50%{box-shadow:0 0 34px rgba(201,169,97,.4)}}
+.deck.waiting .face.back{animation:breathe 2.4s ease-in-out infinite}
+/* result text */
+.r-kw{display:flex;gap:8px;justify-content:center;margin:16px 0 14px;flex-wrap:wrap}
+.r-kw span{background:var(--gold-soft);color:var(--gold);border-radius:999px;padding:2px 14px;font-size:.75rem}
+.r-msg{font-size:.95rem;text-align:center;max-width:29em;margin:0 auto 8px;line-height:2.05}
+.again{text-align:center;color:var(--mist);font-size:.78rem;margin-top:18px}
+.share{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.share a{border-radius:2px;padding:11px 26px;font-size:.85rem;text-decoration:none;cursor:pointer;border:1px solid var(--gold-dim);background:transparent;color:var(--ink);transition:.2s}
+.share a:hover{border-color:var(--gold);background:var(--gold-soft)}
+.share .line{background:#06c755;color:#fff;border-color:#06c755}
+/* card index list */
+.cindex{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;font-size:.8rem}
+.cindex div{border:1px solid var(--line);border-radius:3px;padding:8px 10px;background:rgba(28,48,36,.45)}
+.cindex img{width:100%;border-radius:3px;display:block;margin-bottom:6px}
+.cindex b{font-family:'Shippori Mincho',serif;color:var(--gold-hi);font-weight:600;display:block;font-size:.85rem}
+.cindex span{color:var(--sub);font-size:.72rem}
+.ad-slot{border:1px dashed var(--gold-dim);border-radius:3px;min-height:100px;display:flex;align-items:center;justify-content:center;color:#5d6a58;font-size:.7rem;letter-spacing:.25em;margin:32px 0;background:rgba(23,40,31,.5)}
+footer{border-top:1px solid var(--line);margin-top:52px;padding:36px 0 46px;color:var(--sub);font-size:.76rem}
+footer a{color:var(--gold)}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <a class="logo" href="../">ねこよみ堂<small>nekoyomido</small></a>
+    <nav>
+      <a href="../">うらないTOP</a>
+      <a href="../omikuji/">おみくじ</a>
+      <a href="../ranking/">ランキング</a>
+    </nav>
+  </div>
+</header>
+<div class="crumb"><a href="../">ねこよみ堂</a> ＞ ねこの森カード</div>
+
+<main class="wrap">
+
+  <div class="hero">
+    <span class="en">forest cat cards</span>
+    <h1>ねこの森カード</h1>
+    <p>森の猫たちがつたえる、36枚の絵札。1日に1枚だけ、きょうのあなたへの「しらせ」をめくることができます。</p>
+  </div>
+
+  <div class="card">
+    <p class="deck-hint" id="deck-hint">こころをしずめて、カードにそっとふれてみて。</p>
+    <div class="deck waiting" id="deck" onclick="reveal()">
+      <div class="flip" id="flip">
+        <div class="face back">
+          <svg viewBox="0 0 190 290" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#c9a961" stroke-width="1.2" opacity=".85">
+              <circle cx="95" cy="145" r="52"/>
+              <circle cx="95" cy="145" r="44" stroke-dasharray="3 5"/>
+              <path d="M95 101 C104 110 104 120 95 129 C86 120 86 110 95 101 Z"/>
+              <path d="M95 101 C104 110 104 120 95 129 C86 120 86 110 95 101 Z" transform="rotate(120 95 138)"/>
+              <path d="M95 101 C104 110 104 120 95 129 C86 120 86 110 95 101 Z" transform="rotate(240 95 138)"/>
+            </g>
+            <g fill="#c9a961" opacity=".8">
+              <ellipse cx="95" cy="152" rx="7" ry="6"/>
+              <circle cx="86" cy="143" r="3"/><circle cx="92" cy="139" r="3"/>
+              <circle cx="98" cy="139" r="3"/><circle cx="104" cy="143" r="3"/>
+            </g>
+            <circle cx="40" cy="40" r="1.6" fill="#e5cd8f"/><circle cx="150" cy="52" r="1.2" fill="#e5cd8f"/>
+            <circle cx="52" cy="248" r="1.2" fill="#e5cd8f"/><circle cx="146" cy="240" r="1.6" fill="#e5cd8f"/>
+          </svg>
+        </div>
+        <div class="face front">
+          <img id="c-img" alt="">
+          <div class="caption">
+            <div class="cardno" id="c-no"></div>
+            <div class="cardname" id="c-name"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="c-result" class="hidden">
+      <div class="r-kw" id="c-kw"></div>
+      <p class="r-msg" id="c-msg"></p>
+      <div class="share" id="c-share"></div>
+      <p class="again" id="c-again">つぎの一枚は、あしためくれますよ。</p>
+    </div>
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot">AD SPACE</div>
+
+  <div class="rule">36枚のカードたち</div>
+  <div class="card" style="padding:24px 20px">
+    <p style="font-size:.85rem;color:var(--sub);margin-bottom:16px">ねこの森カードは、森でくらす猫たちの目にうつるものを写しとった、36枚の絵札です。むずかしい逆位置はありません。でた札のことばを、きょう一日のお守りにどうぞ。</p>
+    <div class="cindex" id="c-index"></div>
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot">AD SPACE</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="font-family:'Shippori Mincho',serif;font-size:1.1rem;letter-spacing:.2em">ねこよみ堂</div>
+    <p style="margin-top:10px">ねこの森カードは、猫の占いやかた「<a href="../">ねこよみ堂</a>」のコンテンツです。</p>
+    <details>
+      <summary>免責事項・プライバシーポリシー</summary>
+      <p style="margin-top:8px">本サイトの占いはエンターテインメント目的のコンテンツです。結果はブラウザ内にのみ保存され、サーバーへは送信されません。本サイトでは第三者配信の広告サービス（Google AdSense等）を利用しています。パーソナライズ広告は<a href="https://adssettings.google.com">広告設定</a>から無効化できます。</p>
+    </details>
+    <p style="margin-top:20px">© 2026 ねこよみ堂</p>
+  </div>
+</footer>
+
+<script>
+/* ================= 36枚のカード ================= */
+const CARDS=[
+ {n:"はしり猫",kw:["しらせ","スピード"],m:"よい知らせが、森の道をこちらへ走ってきています。動きはじめたことは、迷わずそのまま進めて吉。"},
+ {n:"よつばのクローバー",kw:["幸運","ひらめき"],m:"ちいさな幸運が、足もとにかくれている札。いつもの景色を、きょうはすこしだけ丁寧にながめてみて。"},
+ {n:"ささぶね",kw:["旅立ち","変化"],m:"水に浮かべた笹の舟は、あたらしい場所へのあこがれ。行ってみたかった場所・やってみたかったことに、こぎ出す好機です。"},
+ {n:"ねこの家",kw:["安心","帰る場所"],m:"あなたには、ちゃんと帰る場所があります。きょうは家をととのえ、うちがわの幸せをたいせつにする日。"},
+ {n:"おおきな木",kw:["成長","健康"],m:"ゆっくりでも、たしかに育っているものがあります。あせらず、根をはる時間を信じましょう。"},
+ {n:"くも",kw:["迷い","ひと休み"],m:"空にかかる雲は、いつか流れるもの。いま見えないだけで、答えは消えていません。判断は晴れてから。"},
+ {n:"毛糸玉",kw:["こんがらがり","ほどける"],m:"もつれた毛糸は、引っぱるほどかたくなる。ゆるめて、端をみつけて、ひとつずつ。人間関係もおなじです。"},
+ {n:"ミルク",kw:["めぐみ","やさしさ"],m:"あたたかいめぐみを受けとる札。ひとの親切は、遠慮せずにありがたく。お返しは、いつかでいいのです。"},
+ {n:"花たば",kw:["よろこび","おくりもの"],m:"うれしい出来事や、思いがけない贈りものの気配。あなたからだれかに贈るのも、おおいに吉。"},
+ {n:"落ち葉",kw:["区切り","おわりと始まり"],m:"ひとつの季節がおわる札。さみしさは、ちゃんと歩いた証拠です。落ち葉の下では、もう次の芽が待っています。"},
+ {n:"ほうき",kw:["一新","そうじ"],m:"はらいましょう、ためこんだものを。部屋でも、予定でも、心配ごとでも。掃いたあとの床に、運はやってきます。"},
+ {n:"ことり",kw:["おしゃべり","うわさ"],m:"にぎやかな知らせの札。たのしい会話に恵まれる一方、うわさ話には羽をかさないこと。"},
+ {n:"こねこ",kw:["はじまり","むじゃき"],m:"生まれたての好奇心を象徴する札。うまくやろうとせず、はじめてのつもりで楽しむと、うまくいきます。"},
+ {n:"のら猫",kw:["ちゃっかり","用心"],m:"かしこく立ちまわる自由な猫。見習うべき身軽さと、うのみにしない用心と、その両方をつたえる札です。"},
+ {n:"長老猫",kw:["ちから","後ろ盾"],m:"森でいちばんの古株が、あなたの味方につきました。困ったら、経験ある人をたよって吉。"},
+ {n:"ほし",kw:["みちびき","希望"],m:"夜道をてらす星の札。目標がある人は、そのまま北をむいて。まだない人は、きょう見つかる予感。"},
+ {n:"ちょうちょ",kw:["変化","身がるさ"],m:"ひらひらと形をかえる変化の札。予定変更はわるい知らせではなく、風向きのお知らせです。"},
+ {n:"友だち犬",kw:["忠実","信頼"],m:"森の外から来た、義理がたい友。あなたを裏切らない人の顔が、ひとり浮かんだはず。その人をたいせつに。"},
+ {n:"見はらし台",kw:["見通し","俯瞰"],m:"高いところから森ぜんぶを見わたす札。目の前のことから一歩ひいて、全体をながめると答えが見えます。"},
+ {n:"にわ",kw:["交流","ひろば"],m:"みんなの集まる庭の札。さそわれたら顔を出して吉。あたらしい縁は、にぎやかな場所にいます。"},
+ {n:"山",kw:["かべ","持久戦"],m:"目の前に大きな山。でも、山は逃げも攻めもしません。まわり道と休憩をゆるせば、かならず越えられます。"},
+ {n:"わかれ道",kw:["選択","決断"],m:"どちらの道にも、それぞれの景色があります。まちがいをおそれず、「歩きたいほう」をえらんで。"},
+ {n:"ねずみ",kw:["すりへり","点検"],m:"すこしずつ何かをかじられている札。時間、お金、こころの体力。もれている穴を、ひとつふさぎましょう。"},
+ {n:"ハート",kw:["愛","まごころ"],m:"まっすぐな愛情の札。恋にかぎらず、すきなものを「すき」ということ。それだけで運がめぐります。"},
+ {n:"リボン",kw:["約束","むすびつき"],m:"ほどけない結び目の札。約束はまもられ、縁はむすばれます。あなたからの約束も、たいせつに。"},
+ {n:"ふるい本",kw:["知恵","ひみつ"],m:"としょかんの奥でねむる知恵の札。調べもの、学びなおしに吉。だれかの秘密は、そっと閉じておくこと。"},
+ {n:"手紙",kw:["たより","ことば"],m:"ことばが届く札。連絡を待つより、書くほうの側に。みじかい一文が、想像よりよろこばれます。"},
+ {n:"白猫",kw:["純粋","たいせつな人"],m:"まっしろな猫は、けがれのない気持ちの象徴。損得ぬきの気持ちで動くと、いちばんよい結果になります。"},
+ {n:"黒猫",kw:["幸運の使い","直感"],m:"森では、黒猫は幸運のはこび屋。理屈より、きょうは直感。「なんとなくこっち」が正解です。"},
+ {n:"ハーブ",kw:["やすらぎ","回復"],m:"こころとからだを癒やす、みどりの香り。休むことに許可のいらない札です。ゆっくりなさい。"},
+ {n:"太陽",kw:["成功","あたたかさ"],m:"森じゅうをてらす、いちばん強い札。すすめてきたことが、ひなたに出ます。むねを張ってどうぞ。"},
+ {n:"月",kw:["こころ","評判"],m:"夜をてらす月は、あなたの内がわと、人からの評判をうつす鏡。ていねいなふるまいが、しずかに評価されています。"},
+ {n:"鍵",kw:["解決","ひらく"],m:"しまっていた扉がひらく札。あきらめていたことに、もういちどだけ手をかけてみて。かちり、と音がします。"},
+ {n:"魚",kw:["ゆたかさ","ながれ"],m:"川をおよぐ銀の魚は、ゆたかさの象徴。お金とチャンスは、ながれのあるところに。動く人のところへ来ます。"},
+ {n:"鈴",kw:["おちつき","定着"],m:"ちりん、と鳴って居場所をしらせる鈴。ふらふらしていたものが、おちつく先を見つける札です。"},
+ {n:"祠",kw:["まもり","ためし"],m:"森のおくの、ちいさな祠。すこし試される時期ですが、見えない加護がついています。ていねいに、まっすぐに。"}
+];
+/* ================= LOGIC ================= */
+const KEY="nekocard";
+function todayKey(){
+  const d=new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+const $=id=>document.getElementById(id);
+let revealed=false;
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"null");}catch(e){return null;}}
+function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+function reveal(){
+  if(revealed)return;
+  const saved=load();
+  let idx;
+  if(saved&&saved.date===todayKey()&&CARDS[saved.i])idx=saved.i;
+  else{idx=Math.floor(Math.random()*CARDS.length);save({date:todayKey(),i:idx});}
+  showCard(idx,true);
+}
+function cardImg(idx){return "../assets/img/card"+String(idx+1).padStart(2,"0")+".webp";}
+function showCard(idx,animate){
+  revealed=true;
+  const c=CARDS[idx];
+  $("c-img").src=cardImg(idx);
+  $("c-no").textContent="no. "+(idx+1)+" / 36";
+  $("c-name").textContent=c.n;
+  $("deck").classList.remove("waiting");
+  if(animate){setTimeout(()=>$("flip").classList.add("done"),120);}
+  else $("flip").classList.add("done");
+  $("deck-hint").textContent="きょうの一枚は ──";
+  setTimeout(()=>{
+    $("c-kw").innerHTML=c.kw.map(k=>"<span>#"+k+"</span>").join("");
+    $("c-msg").textContent=c.m;
+    const url=location.origin+location.pathname;
+    const text="きょうのねこの森カードは『"+c.n+"』（"+c.kw.join("・")+"）でした🐾 #ねこの森カード #ねこよみ堂";
+    $("c-share").innerHTML=
+     '<a href="https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url)+'" target="_blank" rel="noopener">𝕏 でシェア</a>'
+     +'<a class="line" href="https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text)+'" target="_blank" rel="noopener">LINEで送る</a>';
+    $("c-result").classList.remove("hidden");
+  },animate?900:0);
+}
+/* ================= BOOT ================= */
+(function(){
+  $("c-index").innerHTML=CARDS.map((c,i)=>'<div><img loading="lazy" src="../assets/img/thumb/card'+String(i+1).padStart(2,"0")+'.webp" alt="'+c.n+'"><b>'+(i+1)+'. '+c.n+'</b><span>'+c.kw.join("・")+'</span></div>').join("");
+  const saved=load();
+  if(saved&&saved.date===todayKey()&&CARDS[saved.i]){
+    showCard(saved.i,false);
+  }
+})();
+</script>
+</body>
+<!-- NEKOYOMIDO cards v1.0 -->
+</html>

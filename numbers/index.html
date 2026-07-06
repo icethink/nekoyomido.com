@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ねこ数字占い | 携帯下4桁でわかる、あなたの猫数字 | ねこよみ堂</title>
+<meta name="description" content="携帯番号の下4桁をたすだけ。0〜36の「猫数字」で、あなたの持ちあじと運のながれがわかります。暗証番号や車のナンバーでも。無料・登録不要。">
+<meta property="og:title" content="ねこ数字占い | あなたの猫数字はいくつ？">
+<meta property="og:description" content="携帯下4桁をたすだけの、猫たちの数字占い。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nekoyomido.com/assets/img/og_numbers.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1a15; --bg2:#122019; --panel:#17281f;
+  --ink:#e9dfc6; --sub:#a89f88; --mist:#8fa596;
+  --gold:#c9a961; --gold-hi:#e5cd8f; --gold-dim:#7d6a45; --gold-soft:rgba(201,169,97,.12);
+  --line:#33453a; --rose:#c98598;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(233,220,180,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 12%, rgba(233,220,180,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 34%, rgba(233,220,180,.20) 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 64%, rgba(233,220,180,.18) 50%, transparent 51%),
+    radial-gradient(ellipse 140% 70% at 50% -20%, rgba(78,138,106,.18) 0%, transparent 60%);
+  color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.9;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Shippori Mincho',serif;font-weight:600;letter-spacing:.08em}
+.en{font-family:'Uncial Antiqua',serif;color:var(--gold);letter-spacing:.35em}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:rgba(14,26,21,.85)}
+.head-in{max-width:680px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Shippori Mincho',serif;font-size:1.2rem;letter-spacing:.2em;color:var(--ink);text-decoration:none}
+.logo small{font-family:'Uncial Antiqua',serif;font-size:.58rem;color:var(--gold);letter-spacing:.3em;display:block}
+nav a{font-size:.8rem;color:var(--mist);text-decoration:none;margin-left:18px}
+nav a:hover{color:var(--gold-hi)}
+.crumb{max-width:680px;margin:0 auto;padding:10px 20px 0;font-size:.72rem;color:var(--sub)}
+.crumb a{color:var(--gold);text-decoration:none}
+.hero{text-align:center;padding:50px 0 26px}
+.hero .en{font-size:.72rem;margin-bottom:16px;display:block}
+.hero h1{font-size:1.55rem;line-height:1.8;margin-bottom:12px;color:var(--gold-hi);text-shadow:0 0 24px rgba(201,169,97,.25)}
+.hero p{color:var(--sub);font-size:.9rem;max-width:32em;margin:0 auto}
+.rule{display:flex;align-items:center;gap:14px;color:var(--gold);font-size:.78rem;letter-spacing:.35em;margin:46px 0 24px;justify-content:center}
+.rule::before,.rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-dim))}
+.rule::after{background:linear-gradient(90deg,var(--gold-dim),transparent)}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--gold-dim);border-radius:3px;padding:34px 28px;position:relative;box-shadow:inset 0 0 60px rgba(0,0,0,.35)}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,169,97,.25);border-radius:2px;pointer-events:none}
+.btn{display:inline-block;background:linear-gradient(180deg,#dabf78,#a2803e);color:#181206;border:1px solid var(--gold-hi);border-radius:2px;padding:14px 44px;font-size:.98rem;letter-spacing:.2em;cursor:pointer;font-family:'Shippori Mincho',serif;transition:.25s;box-shadow:0 0 24px rgba(201,169,97,.18)}
+.btn:hover{box-shadow:0 0 34px rgba(201,169,97,.4);transform:translateY(-1px)}
+.center{text-align:center}
+.hidden{display:none}
+.digits{display:flex;gap:10px;justify-content:center;margin:6px 0 20px}
+.digits input{width:58px;height:68px;text-align:center;font-size:1.7rem;font-family:'Shippori Mincho',serif;background:#122019;color:var(--gold-hi);border:1px solid var(--gold-dim);border-radius:3px;outline:none}
+.digits input:focus{border-color:var(--gold);box-shadow:0 0 14px rgba(201,169,97,.25)}
+.d-note{text-align:center;color:var(--sub);font-size:.8rem;margin-bottom:18px}
+/* result */
+.n-big{font-family:'Shippori Mincho',serif;font-size:3.4rem;text-align:center;color:var(--gold-hi);text-shadow:0 0 30px rgba(201,169,97,.35);line-height:1.3}
+.n-title{font-family:'Shippori Mincho',serif;font-size:1.3rem;text-align:center;color:var(--ink);letter-spacing:.14em;margin-bottom:6px}
+.n-stars{text-align:center;color:var(--gold);letter-spacing:.3em;margin-bottom:16px;font-size:1rem}
+.n-msg{font-size:.95rem;text-align:center;max-width:29em;margin:0 auto 20px;line-height:2.05}
+.share{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.share a{border-radius:2px;padding:11px 26px;font-size:.85rem;text-decoration:none;cursor:pointer;border:1px solid var(--gold-dim);background:transparent;color:var(--ink);transition:.2s}
+.share a:hover{border-color:var(--gold);background:var(--gold-soft)}
+.share .line{background:#06c755;color:#fff;border-color:#06c755}
+.retry{text-align:center;margin-top:18px}
+.retry a{color:var(--gold);font-size:.82rem;cursor:pointer;border-bottom:1px dashed var(--gold-dim)}
+.lucky-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;font-size:.8rem}
+.lucky-list div{border:1px solid var(--line);border-radius:3px;padding:8px 10px;background:rgba(28,48,36,.45)}
+.lucky-list img{width:100%;border-radius:3px;display:block;margin-bottom:6px}
+.lucky-list b{font-family:'Shippori Mincho',serif;color:var(--gold-hi);font-weight:600}
+.n-img{width:180px;margin:0 auto 14px}
+.n-img img{width:100%;border-radius:8px;border:1px solid var(--gold-dim);box-shadow:0 0 22px rgba(201,169,97,.2)}
+.ad-slot{border:1px dashed var(--gold-dim);border-radius:3px;min-height:100px;display:flex;align-items:center;justify-content:center;color:#5d6a58;font-size:.7rem;letter-spacing:.25em;margin:32px 0;background:rgba(23,40,31,.5)}
+footer{border-top:1px solid var(--line);margin-top:52px;padding:36px 0 46px;color:var(--sub);font-size:.76rem}
+footer a{color:var(--gold)}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--gold)}
+@media(max-width:430px){.digits input{width:50px;height:60px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <a class="logo" href="../">ねこよみ堂<small>nekoyomido</small></a>
+    <nav>
+      <a href="../">うらないTOP</a>
+      <a href="../omikuji/">おみくじ</a>
+      <a href="../cards/">森カード</a>
+    </nav>
+  </div>
+</header>
+<div class="crumb"><a href="../">ねこよみ堂</a> ＞ ねこ数字占い</div>
+
+<main class="wrap">
+
+  <div class="hero">
+    <span class="en">cat number reading</span>
+    <h1>ねこ数字占い</h1>
+    <p>いつも持ちあるく数字には、その人の運のくせが宿る──と森の猫たちはいいます。携帯番号の下4桁を、ひとつずつどうぞ。</p>
+  </div>
+
+  <div class="card">
+    <div class="digits">
+      <input type="tel" maxlength="1" inputmode="numeric" id="d0">
+      <input type="tel" maxlength="1" inputmode="numeric" id="d1">
+      <input type="tel" maxlength="1" inputmode="numeric" id="d2">
+      <input type="tel" maxlength="1" inputmode="numeric" id="d3">
+    </div>
+    <p class="d-note">携帯番号の下4桁のほか、車のナンバーや、よくつかう4桁でも占えます。<br>（数字はどこにも送信されません）</p>
+    <div class="center"><button class="btn" onclick="read()">猫数字をよむ</button></div>
+
+    <div id="n-result" class="hidden" style="margin-top:28px">
+      <p style="text-align:center;color:var(--sub);font-size:.8rem;margin-bottom:4px" id="n-calc"></p>
+      <div class="n-img hidden" id="n-imgbox"><img id="n-img" alt=""></div>
+      <div class="n-big" id="n-num"></div>
+      <div class="n-title" id="n-title"></div>
+      <div class="n-stars" id="n-stars"></div>
+      <p class="n-msg" id="n-msg"></p>
+      <div class="share" id="n-share"></div>
+      <div class="retry"><a onclick="retry()">べつの数字もよんでみる</a></div>
+    </div>
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot">AD SPACE</div>
+
+  <div class="rule">猫たちがすきな数字</div>
+  <div class="card" style="padding:24px 20px">
+    <p style="font-size:.85rem;color:var(--sub);margin-bottom:14px">合計がこの数になる4桁は、森では「えんぎのいい数字」とされています。待ち受けの数字や暗証番号えらびの、おまもりにどうぞ。</p>
+    <div class="lucky-list">
+      <div><img loading="lazy" src="../assets/img/thumb/num_08.webp" alt="8"><b>8 ─ 肉球のかず</b><br>まねきよせる数。人もお金も。</div>
+      <div><img loading="lazy" src="../assets/img/thumb/num_11.webp" alt="11"><b>11 ─ ぴんとしっぽ</b><br>直感がさえる数。</div>
+      <div><img loading="lazy" src="../assets/img/thumb/num_15.webp" alt="15"><b>15 ─ ひだまり</b><br>人気とあたたかさの数。</div>
+      <div><img loading="lazy" src="../assets/img/thumb/num_21.webp" alt="21"><b>21 ─ てっぺん</b><br>のぼりつめる数。</div>
+      <div><img loading="lazy" src="../assets/img/thumb/num_24.webp" alt="24"><b>24 ─ またたび</b><br>ゆたかさと魅了の数。</div>
+      <div><img loading="lazy" src="../assets/img/thumb/num_31.webp" alt="31"><b>31 ─ だいかぞく</b><br>よい仲間にかこまれる数。</div>
+      <div><img loading="lazy" src="../assets/img/thumb/num_32.webp" alt="32"><b>32 ─ ごえんの鈴</b><br>幸運な出会いをよぶ数。</div>
+    </div>
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot">AD SPACE</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="font-family:'Shippori Mincho',serif;font-size:1.1rem;letter-spacing:.2em">ねこよみ堂</div>
+    <p style="margin-top:10px">ねこ数字占いは、猫の占いやかた「<a href="../">ねこよみ堂</a>」のコンテンツです。</p>
+    <details>
+      <summary>免責事項・プライバシーポリシー</summary>
+      <p style="margin-top:8px">本サイトの占いはエンターテインメント目的のコンテンツです。入力された数字はブラウザ内でのみ計算され、サーバーへは送信・保存されません。本サイトでは第三者配信の広告サービス（Google AdSense等）を利用しています。パーソナライズ広告は<a href="https://adssettings.google.com">広告設定</a>から無効化できます。</p>
+    </details>
+    <p style="margin-top:20px">© 2026 ねこよみ堂</p>
+  </div>
+</footer>
+
+<script>
+/* ================= 猫数字辞典 0-36 ================= */
+/* [名前, 吉レベル1-5, 本文] */
+const NUMBERS=[
+ ["まっしろ",3,"まだなにも書かれていない、白紙の数。これからどんな模様にもなれる、のびしろそのものです。あたらしい習いごとに吉。"],
+ ["一番星",5,"まっさきに光る、リーダーの数。先頭に立つと運がまわりはじめます。手をあげる勇気を。"],
+ ["よりそい",4,"ふたりでひとつの、ペアの数。だれかと組むと力が倍になります。相棒をたいせつに。"],
+ ["こねこ",4,"好奇心のかたまりの数。あたらしいもの好きの運。とびつく前に、ひと呼吸だけおくとなお吉。"],
+ ["よつあし",3,"地にしっかり立つ、安定の数。こつこつ型。派手さはないぶん、ころびにくい人生の足どりです。"],
+ ["ごはん",4,"たべものに困らない、めぐみの数。ひとにごちそうすると、めぐりがさらによくなります。"],
+ ["おすまし",3,"身だしなみと美意識の数。ととのえるほど運があがる持ちあじ。ただし完璧主義にはご用心。"],
+ ["ななころび",4,"ころんでも起きあがる数。失敗が経験値になりやすい、しぶとい幸運の持ち主です。"],
+ ["肉球",5,"まねきよせる大吉数。人も、お金も、チャンスも、ぷにぷにと吸いよせます。森でいちばん人気の数。"],
+ ["ここのつ命",4,"猫の九つの命の数。土壇場に強く、立てなおしの名人。ピンチはチャンスの合図です。"],
+ ["まんまる",3,"欠けのない、円満の数。争いをまるくおさめる力があります。そのぶん、ためこみすぎに注意。"],
+ ["ぴんとしっぽ",5,"直感がさえわたる数。「なんとなく」が高確率で当たります。最初のひらめきを信じて。"],
+ ["つきよ",3,"月夜のロマンの数。感受性ゆたかで、芸術と相性よし。夜ふかしだけが玉にきず。"],
+ ["くろねこ",4,"逆転の幸運数。不吉といわれて、じつは幸運のはこび屋。ひとの評価より、じぶんの目を信じる数です。"],
+ ["ひるね",2,"休息をもとめる数。がんばりすぎのサインが出やすいので、意識して休む予定を入れると運がもどります。"],
+ ["ひだまり",5,"人があつまる、あたたかい人気の数。いるだけで場がなごむ徳の持ち主。たのまれごとは福のもと。"],
+ ["みち草",2,"寄り道の数。たのしい発見も多いぶん、本題を見うしないがち。「きょうの目的」をひとつだけ決めて。"],
+ ["一直線",4,"わき目もふらない集中の数。狙った獲物は逃さないタイプ。ただし、まわりの声にも耳のひとつを。"],
+ ["よふかし",2,"夜型の数。夜の集中力はすごいのに、朝におつりがくるタイプ。眠りをととのえると運が化けます。"],
+ ["あまえ",3,"甘えじょうずの数。たよるのがうまいのは立派な才能。ありがとうを忘れなければ、ずっと愛されます。"],
+ ["おおきなき",4,"大器晩成の数。ゆっくり育って、大きく茂ります。いまの努力は、ぜんぶ年輪になっています。"],
+ ["てっぺん",5,"のぼりつめる頂点の数。目標を高くかかげるほど力がでます。屋根の上から、遠くを見て。"],
+ ["ふみふみ",3,"こつこつ続ける継続の数。毎日のちいさな積みかさねが、いちばんの武器。三日ぼうずでも、四日目に再開すれば続いたのとおなじ。"],
+ ["かぜのこ",4,"風のように身がるな、コミュニケーションの数。話し上手で顔がひろい。縁が縁をはこんできます。"],
+ ["またたび",5,"ゆたかさと魅了の大吉数。お金とチャンスに好かれる、ふしぎな引力があります。つかいすぎにだけご注意。"],
+ ["きちょうめん",4,"筋道だてて考える、理知の数。計画・分析・段取りに強い頭脳派。たまには計画のない休日も。"],
+ ["わすれもの",2,"うっかりの数。わすれものと言いまちがいが出やすいので、だいじなことはメモと指さし確認を。"],
+ ["ひとりじかん",3,"孤高の数。ひとりの時間に力を充電してまわる型。むりに群れなくて、だいじょうぶ。"],
+ ["のらしごと",2,"停滞ぎみの数。がんばりが空まわりしやすいときは、やり方より休み方を変えるのがこつ。"],
+ ["ボスねこ",4,"統率の数。まかせられると強く、面倒見のよさで慕われます。かかえこみすぎにはご用心。"],
+ ["きまぐれ",3,"むらっけの数。気分の波はあるけれど、乗れたときの爆発力はぴかいち。波のよい日をのがさないで。"],
+ ["だいかぞく",5,"仲間にめぐまれる大吉数。困ったとき、かならずだれかが手をさしのべてくれます。お返しは笑顔で。"],
+ ["ごえんの鈴",5,"ちりんと鳴って、良縁をよぶ数。出会い運がつよく、人とのつながりが財産になります。"],
+ ["おおものねこ",4,"大胆なカリスマの数。こまかいことは気にしない器のおおきさが魅力。書類の確認だけは、ていねいに。"],
+ ["やぶれかぶれ",2,"波乱の数。ジェットコースター運ですが、落ちたぶんだけ上がるのも早い。大勝負の日をえらぶ目をもって。"],
+ ["おかあさん猫",4,"つつみこむ母性の数。育てる・支える・癒やすことで運があがります。じぶんの世話も、忘れずに。"],
+ ["ものがたり",3,"波乱万丈、でもドラマチックな数。平凡とは無縁の人生脚本。その物語の主役は、いつもあなたです。"]
+];
+/* ================= LOGIC ================= */
+const $=id=>document.getElementById(id);
+function read(){
+  const ds=[0,1,2,3].map(i=>$("d"+i).value);
+  if(ds.some(v=>!/^[0-9]$/.test(v))){
+    alert("数字を4つ、ひとマスずつ入れてね🐾");
+    return;
+  }
+  const sum=ds.reduce((s,v)=>s+Number(v),0);
+  const[name,lv,msg]=NUMBERS[sum];
+  const LUCKY_IMG={8:"num_08",11:"num_11",15:"num_15",21:"num_21",24:"num_24",31:"num_31",32:"num_32"};
+  if(LUCKY_IMG[sum]){
+    $("n-img").src="../assets/img/"+LUCKY_IMG[sum]+".webp";
+    $("n-imgbox").classList.remove("hidden");
+  }else{
+    $("n-imgbox").classList.add("hidden");
+  }
+  $("n-calc").textContent=ds.join(" + ")+" =";
+  $("n-num").textContent=sum;
+  $("n-title").textContent="『"+name+"』の数";
+  $("n-stars").textContent="えんぎ "+"★".repeat(lv)+"☆".repeat(5-lv);
+  $("n-msg").textContent=msg;
+  const url=location.origin+location.pathname;
+  const text="私の猫数字は "+sum+"『"+name+"』（えんぎ"+"★".repeat(lv)+"）でした🐾 #ねこ数字占い #ねこよみ堂";
+  $("n-share").innerHTML=
+   '<a href="https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url)+'" target="_blank" rel="noopener">𝕏 でシェア</a>'
+   +'<a class="line" href="https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text)+'" target="_blank" rel="noopener">LINEで送る</a>';
+  $("n-result").classList.remove("hidden");
+  $("n-result").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function retry(){
+  [0,1,2,3].forEach(i=>$("d"+i).value="");
+  $("n-result").classList.add("hidden");
+  $("d0").focus();
+}
+/* 入力補助: 1文字入れたら次のマスへ */
+(function(){
+  [0,1,2,3].forEach(i=>{
+    const el=$("d"+i);
+    el.addEventListener("input",()=>{
+      el.value=el.value.replace(/[^0-9]/g,"").slice(0,1);
+      if(el.value&&i<3)$("d"+(i+1)).focus();
+    });
+    el.addEventListener("keydown",e=>{
+      if(e.key==="Backspace"&&!el.value&&i>0)$("d"+(i-1)).focus();
+      if(e.key==="Enter")read();
+    });
+  });
+})();
+</script>
+</body>
+<!-- NEKOYOMIDO numbers v1.0 -->
+</html>

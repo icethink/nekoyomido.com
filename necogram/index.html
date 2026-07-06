@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ネコグラム | 猫タイプ性格診断 — 16猫種×4スタイル 64タイプ相性診断 | ねこよみ堂</title>
+<meta name="description" content="あなたを猫にたとえると？16の猫種×4つの猫スタイルで導く64タイプの本格性格診断。気になるあの人との相性診断も無料。1分で完了、登録不要。">
+<meta property="og:title" content="ネコグラム | あなたはどの猫？64タイプ性格診断">
+<meta property="og:description" content="16猫種×4スタイル=64タイプ。あなたの「猫格」と、あの人との相性を診断。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nekoyomido.com/assets/img/og_necogram.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1a15; --paper:#17281f; --ink:#e9dfc6; --sub:#a89f88;
+  --line:#33453a; --accent:#c9a961; --accent-soft:rgba(201,169,97,.12); --accent-deep:#e5cd8f;
+  --gold-dim:#7d6a45; --gold-hi:#e5cd8f;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(233,220,180,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 12%, rgba(233,220,180,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 34%, rgba(233,220,180,.20) 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 64%, rgba(233,220,180,.18) 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 55%, rgba(233,220,180,.22) 50%, transparent 51%),
+    radial-gradient(ellipse 140% 70% at 50% -20%, rgba(78,138,106,.18) 0%, transparent 60%);
+  color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.85;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Shippori Mincho',serif;font-weight:600;letter-spacing:.06em}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:rgba(14,26,21,.85)}
+.head-in{max-width:720px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Shippori Mincho',serif;font-size:1.25rem;letter-spacing:.18em;cursor:pointer}
+.logo small{font-family:'Uncial Antiqua',serif;font-size:.58rem;color:var(--accent);letter-spacing:.3em;display:block}
+nav a{font-size:.8rem;color:var(--sub);text-decoration:none;margin-left:18px;cursor:pointer}
+nav a:hover{color:var(--accent-deep)}
+.crumb{max-width:720px;margin:0 auto;padding:8px 20px 0;font-size:.75rem}
+.crumb a{color:var(--accent-deep);text-decoration:none}
+.hero{text-align:center;padding:64px 0 48px}
+.hero .en{font-family:'Uncial Antiqua',serif;color:var(--accent);letter-spacing:.4em;font-size:.72rem;margin-bottom:14px}
+.hero h1{font-size:1.7rem;line-height:1.7;margin-bottom:18px;color:var(--gold-hi);text-shadow:0 0 26px rgba(201,169,97,.25)}
+.hero p{color:var(--sub);font-size:.92rem;max-width:34em;margin:0 auto 30px}
+.badges{display:flex;gap:10px;justify-content:center;margin-bottom:34px;flex-wrap:wrap}
+.badge{border:1px solid var(--gold-dim);background:transparent;border-radius:999px;padding:4px 16px;font-size:.75rem;color:var(--sub)}
+.btn{display:inline-block;background:linear-gradient(180deg,#dabf78,#a2803e);color:#181206;border:1px solid var(--gold-hi);border-radius:2px;padding:15px 52px;font-size:1rem;letter-spacing:.2em;cursor:pointer;font-family:'Shippori Mincho',serif;transition:.25s;box-shadow:0 0 24px rgba(201,169,97,.18)}
+.btn:hover{box-shadow:0 0 34px rgba(201,169,97,.4);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--gold-hi);border:1px solid var(--gold-dim);padding:12px 34px;font-size:.88rem;box-shadow:none}
+.btn.ghost:hover{border-color:var(--accent);color:var(--gold-hi);background:var(--accent-soft)}
+.rule{display:flex;align-items:center;gap:16px;color:var(--accent);font-size:.78rem;letter-spacing:.35em;margin:56px 0 28px;justify-content:center}
+.rule::before,.rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-dim))}
+.rule::after{background:linear-gradient(90deg,var(--gold-dim),transparent)}
+section{padding:8px 0 40px}
+.card{background:linear-gradient(180deg,var(--paper),#122019);border:1px solid var(--gold-dim);border-radius:3px;padding:34px 30px;position:relative;box-shadow:inset 0 0 60px rgba(0,0,0,.35)}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,169,97,.25);border-radius:2px;pointer-events:none;z-index:0}
+.card>*{position:relative;z-index:1}
+/* quiz */
+.progress{height:4px;background:var(--line);border-radius:2px;margin-bottom:30px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);border-radius:2px;transition:width .35s}
+.qnum{color:var(--accent);font-size:.75rem;letter-spacing:.3em;text-align:center;margin-bottom:10px}
+.qtext{font-family:'Shippori Mincho',serif;font-size:1.15rem;text-align:center;margin-bottom:28px;line-height:1.9}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{background:rgba(28,48,36,.55);border:1px solid var(--line);border-radius:3px;padding:15px 20px;font-size:.92rem;cursor:pointer;text-align:left;transition:.2s;line-height:1.7;color:var(--ink)}
+.opt:hover{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 18px rgba(201,169,97,.12)}
+.backlink{display:block;text-align:center;margin-top:22px;font-size:.78rem;color:var(--sub);cursor:pointer;background:none;border:none}
+/* result */
+.result-head{text-align:center;padding:10px 0 6px}
+.r-style{color:var(--accent-deep);letter-spacing:.25em;font-size:.85rem;margin-bottom:6px}
+.r-title{font-size:1.65rem;margin:6px 0 2px;color:var(--gold-hi);text-shadow:0 0 24px rgba(201,169,97,.3)}
+.r-breed{color:var(--sub);font-size:.9rem;letter-spacing:.15em}
+.r-code{display:inline-block;margin-top:10px;border:1px solid var(--accent);color:var(--accent-deep);border-radius:999px;padding:2px 18px;font-size:.8rem;letter-spacing:.2em}
+.catbox{width:190px;margin:18px auto}
+.cimg{width:100%;border-radius:8px;display:block;border:1px solid var(--gold-dim)}
+.simg{width:120px;margin:10px auto 0}
+.simg img{width:100%;border-radius:8px;border:1px solid var(--gold-dim)}
+.kw{display:flex;gap:8px;justify-content:center;margin:14px 0 22px;flex-wrap:wrap}
+.kw span{background:var(--accent-soft);color:var(--accent-deep);border-radius:999px;padding:3px 16px;font-size:.78rem}
+.r-desc{font-size:.95rem;margin-bottom:18px}
+.sub-h{font-family:'Shippori Mincho',serif;color:var(--accent-deep);font-size:.95rem;letter-spacing:.15em;margin:26px 0 8px;display:flex;align-items:center;gap:10px}
+.sub-h::after{content:"";height:1px;background:var(--line);flex:1}
+.gauges{margin:20px 0}
+.gauge{display:grid;grid-template-columns:3.2em 1fr 3.2em;align-items:center;gap:12px;font-size:.75rem;color:var(--sub);margin-bottom:10px}
+.gbar{height:8px;background:var(--line);border-radius:4px;position:relative}
+.gbar i{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--gold-hi);border:3px solid #122019;box-shadow:0 0 0 1px var(--accent),0 0 10px rgba(201,169,97,.6)}
+.share{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.share a,.share button{border-radius:2px;padding:11px 26px;font-size:.85rem;text-decoration:none;cursor:pointer;border:1px solid var(--gold-dim);background:transparent;color:var(--ink);transition:.2s;font-family:'Noto Sans JP',sans-serif}
+.share .x:hover{border-color:var(--accent);background:var(--accent-soft)}
+.share .line{background:#06c755;color:#fff;border-color:#06c755}
+.share .copy:hover{border-color:var(--accent)}
+.invite{background:var(--accent-soft);border:1px solid var(--accent);border-radius:3px;padding:18px 22px;font-size:.88rem;margin-bottom:26px;text-align:center}
+/* compat */
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin-bottom:24px}
+.pair .vs{font-family:'Shippori Mincho',serif;color:var(--accent);letter-spacing:.1em}
+.psel{display:flex;flex-direction:column;gap:8px}
+.psel label{font-size:.72rem;color:var(--sub);letter-spacing:.15em}
+select{width:100%;padding:10px 12px;border:1px solid var(--gold-dim);border-radius:3px;background:#122019;color:var(--ink);font-size:.85rem;font-family:inherit}
+.score-wrap{text-align:center;padding:8px 0}
+.score-num{font-family:'Shippori Mincho',serif;font-size:3.4rem;color:var(--accent-deep);line-height:1.2}
+.score-num small{font-size:1.1rem}
+.score-label{font-family:'Shippori Mincho',serif;font-size:1.15rem;margin-bottom:14px}
+.meter{height:10px;background:var(--line);border-radius:5px;overflow:hidden;max-width:420px;margin:0 auto 22px}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,#8a744a,#e5cd8f);border-radius:5px;transition:width .8s ease;box-shadow:0 0 12px rgba(201,169,97,.5)}
+.compat-cats{display:flex;justify-content:center;gap:6px;align-items:center;margin-bottom:8px}
+.compat-cats .cc{width:110px}
+.compat-cats .heart{color:var(--accent);font-size:1.4rem}
+.cc-name{font-size:.72rem;color:var(--sub);text-align:center;line-height:1.5}
+/* type list */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.tcard{background:rgba(28,48,36,.55);border:1px solid var(--line);border-radius:3px;padding:16px 10px;text-align:center;cursor:pointer;transition:.2s}
+.tcard:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 0 22px rgba(201,169,97,.15)}
+.tcard .ti{width:74px;margin:0 auto 6px}
+.tcard b{font-family:'Shippori Mincho',serif;font-size:.85rem;display:block;font-weight:600}
+.tcard span{font-size:.68rem;color:var(--sub);letter-spacing:.1em}
+/* ads */
+.ad-slot{border:1px dashed var(--gold-dim);border-radius:3px;min-height:100px;display:flex;align-items:center;justify-content:center;color:#5d6a58;font-size:.7rem;letter-spacing:.25em;margin:34px 0;background:rgba(23,40,31,.5)}
+footer{border-top:1px solid var(--line);margin-top:50px;padding:36px 0 46px;color:var(--sub);font-size:.78rem}
+footer h3{font-size:.85rem;color:var(--ink);margin:18px 0 6px}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--accent-deep)}
+.center{text-align:center}
+.hidden{display:none}
+@media(max-width:560px){
+  .pair{grid-template-columns:1fr}
+  .pair .vs{text-align:center}
+  .hero h1{font-size:1.35rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="logo" onclick="go('home')">ネコグラム<small>NECOGRAM</small></div>
+    <nav>
+      <a href="../">うらないTOP</a>
+      <a onclick="startQuiz(null)">診断する</a>
+      <a onclick="go('quick')">4問だけ</a>
+      <a onclick="go('compat')">相性診断</a>
+      <a onclick="go('types')">タイプ一覧</a>
+    </nav>
+  </div>
+</header>
+<div class="crumb"><a href="../">ねこよみ堂</a> ＞ ネコグラム</div>
+
+<main class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <div id="view-home">
+    <div class="hero">
+      <div class="en">cat personality test</div>
+      <h1>あなたのなかには、<br>どんな猫がすんでいますか？</h1>
+      <p>16の猫種 × 4つの猫スタイルで、あなたの「猫格」をみつける64タイプ診断です。ぜんぶで16問、1分ちょっと。気になるあの人との相性もわかります。</p>
+      <div class="badges"><span class="badge">登録なし</span><span class="badge">むりょう</span><span class="badge">64タイプ</span><span class="badge">相性診断つき</span></div>
+      <div id="invite-banner"></div>
+      <button class="btn" onclick="startQuiz(null)">診断をはじめる</button>
+      <p style="margin-top:16px"><a onclick="go('quick')" style="font-size:.85rem;color:var(--accent-deep);cursor:pointer;border-bottom:1px dashed var(--accent)">じぶんのMBTIをもう知ってる方は、4問だけの近道へ →</a></p>
+    </div>
+
+    <!-- AdSense: 審査通過後、この div の中に広告コードを貼り付けてください -->
+    <div class="ad-slot">AD SPACE</div>
+
+    <div class="rule">ネコグラムとは</div>
+    <div class="card" style="font-size:.92rem">
+      <p>ネコグラムは、4つのものさし（そとむき／うちむき・現実派／直感派・あたま派／こころ派・きっちり／きまま）から、あなたにいちばん近い<b>「猫種」</b>をみつける診断です。そこにネコグラムだけの第5のものさし<b>「猫スタイル」</b>——甘えん坊・ツンデレ・ハンター・悟り——をそっとかけあわせて、64タイプのなかからあなたの猫格をさがします。</p>
+      <p style="margin-top:12px;color:var(--sub);font-size:.82rem">※この診断はたのしんでいただくためのコンテンツで、MBTI®（The Myers-Briggs Company）とは関係のない独自の性格類型です。</p>
+    </div>
+  </div>
+
+  <!-- ============ QUICK (MBTI選択→4問) ============ -->
+  <div id="view-quick" class="hidden">
+    <div class="rule">4問だけの近道</div>
+    <div class="card">
+      <p style="font-size:.9rem;color:var(--sub);text-align:center;margin-bottom:20px">いつものMBTIタイプをえらんでね。<br>あとは「猫スタイル」の4問にこたえるだけで、あなたの猫格がわかります。</p>
+      <div class="type-grid" id="quick-grid" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))"></div>
+      <p style="text-align:center;font-size:.78rem;color:var(--sub);margin-top:18px">タイプがわからなくなったら、<a onclick="startQuiz(null)" style="color:var(--accent-deep);cursor:pointer">ぜんぶの質問（16問）から診断</a>もできます。</p>
+    </div>
+  </div>
+
+  <!-- ============ QUIZ ============ -->
+  <div id="view-quiz" class="hidden">
+    <div class="rule">性格診断</div>
+    <div class="card">
+      <div class="progress"><i id="pbar" style="width:0%"></i></div>
+      <div class="qnum" id="qnum"></div>
+      <div class="qtext" id="qtext"></div>
+      <div class="opts" id="opts"></div>
+      <button class="backlink" id="qback" onclick="prevQ()">← ひとつ前にもどる</button>
+    </div>
+  </div>
+
+  <!-- ============ RESULT ============ -->
+  <div id="view-result" class="hidden">
+    <div class="rule">診断結果</div>
+    <div class="card">
+      <div id="result-body"></div>
+    </div>
+    <!-- AdSense: 結果下は最も収益性の高い枠です -->
+    <div class="ad-slot">AD SPACE</div>
+    <div id="result-compat"></div>
+    <div class="center" style="margin-top:8px">
+      <button class="btn ghost" onclick="go('compat')">ふたりの相性をみてみる</button>
+      <button class="btn ghost" onclick="restart()" style="margin-left:8px">もういちど診断する</button>
+    </div>
+  </div>
+
+  <!-- ============ COMPAT ============ -->
+  <div id="view-compat" class="hidden">
+    <div class="rule">相性診断</div>
+    <div class="card">
+      <p style="font-size:.88rem;color:var(--sub);text-align:center;margin-bottom:22px">ふたりのタイプをえらぶだけで、相性がわかります。<br>結果ページの「相性診断リンク」をおくれば、こたえあわせもできますよ。</p>
+      <div class="pair">
+        <div class="psel">
+          <label>あなた</label>
+          <select id="selA-breed"></select>
+          <select id="selA-style"></select>
+        </div>
+        <div class="vs">×</div>
+        <div class="psel">
+          <label>おあいて</label>
+          <select id="selB-breed"></select>
+          <select id="selB-style"></select>
+        </div>
+      </div>
+      <div class="center"><button class="btn" onclick="showCompat()">相性をみる</button></div>
+      <div id="compat-out" style="margin-top:30px"></div>
+    </div>
+    <!-- AdSense -->
+    <div class="ad-slot">AD SPACE</div>
+  </div>
+
+  <!-- ============ TYPES ============ -->
+  <div id="view-types" class="hidden">
+    <div class="rule">16の猫種タイプ</div>
+    <div class="type-grid" id="type-grid"></div>
+    <!-- AdSense -->
+    <div class="ad-slot">AD SPACE</div>
+    <div id="type-detail"></div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">ねこよみ堂<small>NEKOYOMIDO</small></div>
+    <p style="margin-top:10px">ネコグラムは、猫の占いやかた「<a href="../" style="color:var(--accent-deep)">ねこよみ堂</a>」のコンテンツです。</p>
+    <details>
+      <summary>免責事項・プライバシーポリシー</summary>
+      <h3>免責事項</h3>
+      <p>本サイトの診断はエンターテインメントを目的としたものであり、心理学的評価・医学的診断を行うものではありません。MBTI®はThe Myers-Briggs Companyの登録商標であり、本サイトとは一切関係ありません。</p>
+      <h3>プライバシーポリシー</h3>
+      <p>本サイトは回答内容をサーバーに送信・保存しません。診断はすべてお使いのブラウザ内で完結します。本サイトでは第三者配信の広告サービス（Google AdSense等）を利用しており、広告配信事業者はCookieを使用して利用者の興味に応じた広告を表示することがあります。Googleによるデータの取り扱いは「広告 – ポリシーと規約 – Google」をご確認ください。パーソナライズ広告は<a href="https://adssettings.google.com" style="color:var(--accent-deep)">広告設定</a>から無効化できます。</p>
+      <h3>お問い合わせ</h3>
+      <p>サイトに関するお問い合わせは運営者までご連絡ください。</p>
+    </details>
+    <p style="margin-top:20px">© 2026 ねこよみ堂</p>
+  </div>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const BREEDS = {
+  ISTJ:{name:"ブリティッシュショートヘア",epithet:"規律の執事猫",fur:"#94a0b4",inner:"#e9edf3",eye:"#d9931f",kw:["誠実","堅実","継続力"],
+    desc:"まじめで責任感が強く、決めたルーティンを淡々と守り抜く努力家。派手さはありませんが、「この人に任せれば大丈夫」という信頼の毛布でまわりを包みます。約束は必ず守り、記憶力も抜群。",
+    love:"口数は少なくても、行動で愛を示すタイプ。毎日同じ時間にそっと隣に座る、それがこの猫の愛情表現です。",best:"ESFP"},
+  ISFJ:{name:"スコティッシュフォールド",epithet:"見守りの天使猫",fur:"#d9c6a5",inner:"#f6efe2",eye:"#b07a2a",fold:true,kw:["献身","癒やし","気配り"],
+    desc:"折れ耳のように物腰やわらか。困っている人を放っておけず、そっと寄り添う癒やしの名人です。縁の下の力持ちとして、みんなの「ありがとう」を静かなエネルギーに変えます。",
+    love:"相手の小さな変化にいちばん早く気づくタイプ。見守る愛のスペシャリストです。",best:"ESTP"},
+  INFJ:{name:"ターキッシュアンゴラ",epithet:"月夜の預言者猫",fur:"#f2f0ec",inner:"#faf6ef",eye:"#4a90b8",kw:["洞察","理想","神秘"],
+    desc:"静かですが芯は誰よりも強く、人の心の奥をふっと見抜く神秘派。頭の中には理想の世界の設計図があり、そのためなら黙々と努力を続けます。広く浅くより、少数の深い絆を選びます。",
+    love:"軽々しく懐きませんが、一度心を開いた相手には一生ものの忠誠を捧げます。",best:"ENTP"},
+  INTJ:{name:"ロシアンブルー",epithet:"孤高の軍師猫",fur:"#7e8ca3",inner:"#e3e8ef",eye:"#5ba874",kw:["戦略","独立","集中"],
+    desc:"クールな観察者。頭の中には常に3手先までの作戦があります。群れませんが冷たいわけではなく、「認めた相手」にはとことん忠実。静かな部屋と、質の高い時間を好みます。",
+    love:"愛情表現は静かで最小限。でも、あなたの隣という特等席は決して譲りません。",best:"ENFP"},
+  ISTP:{name:"シャルトリュー",epithet:"静かな職人猫",fur:"#8b93a8",inner:"#e7eaf0",eye:"#d98e2b",kw:["器用","冷静","実践"],
+    desc:"無駄な動きはゼロ、必要なときだけ神速で動くタイプ。仕組みを分解して理解するのが好きで、手を動かしている時間が至福です。マイペースですが、ピンチのときに一番頼れる一匹狼。",
+    love:"言葉より行動。困っていると、気づけば隣で黙って直してくれています。",best:"ESFJ"},
+  ISFP:{name:"ペルシャ",epithet:"ひだまりの芸術家猫",fur:"#cbb8c9",inner:"#f3ecf3",eye:"#c47f2c",kw:["感性","調和","マイペース"],
+    desc:"美しいもの、心地よいものに敏感な感性の持ち主。争いごとは苦手で、自分だけのペースと世界観を何より大切にします。ふわりとした優しさで、その場の空気を柔らかくします。",
+    love:"押しつけない優しさが持ち味。一緒にいると時間がゆっくり流れます。",best:"ESTJ"},
+  INFP:{name:"ラグドール",epithet:"夢見る詩人猫",fur:"#e8ddd0",inner:"#f9f4ec",eye:"#5d8fc9",kw:["共感","純粋","想像力"],
+    desc:"抱っこされると力を抜いて委ねるように、信じた相手には全身で心を預ける純粋さの持ち主。理想と空想の世界がどこまでも広く、共感力は64タイプ随一です。",
+    love:"相手の痛みを自分のことのように感じる、深い愛の持ち主。物語のような恋をします。",best:"ENFJ"},
+  INTP:{name:"スフィンクス",epithet:"真理の探究猫",fur:"#d8b49a",inner:"#f2e3d6",eye:"#68a3a0",bald:true,kw:["論理","探究","独創"],
+    desc:"毛皮の代わりに知識をまとうタイプ。気になったことは夜通し調べ、独自の理論を組み立てます。常識よりも「なぜ？」が大切。ユニークな見た目（発想）に、最初は驚かれがちです。",
+    love:"愛を分析しようとして混乱するのもご愛嬌。不器用ですが、興味を持った相手への集中力はすごい。",best:"ENTJ"},
+  ESTP:{name:"ベンガル",epithet:"野生の冒険家猫",fur:"#c98f4a",inner:"#f3dfc4",eye:"#4f8f4f",stripes:true,kw:["行動力","度胸","反射神経"],
+    desc:"考えるより先に体が動くアクション派。スリルと新しい遊び場が大好物で、ピンチのときほど輝く反射神経の持ち主です。今日と同じ明日には興味がありません。",
+    love:"恋も全力の狩り。まっすぐで駆け引きなしのアプローチが魅力です。",best:"ISFJ"},
+  ESFP:{name:"マンチカン",epithet:"舞台の人気者猫",fur:"#e0b98a",inner:"#f8ecd9",eye:"#c2762a",kw:["陽気","愛嬌","今を生きる"],
+    desc:"短い足で全力ダッシュ。そこにいるだけで場がぱっと明るくなるエンターテイナーです。「今この瞬間」を全力で楽しむ天才で、笑顔の連鎖の始点はいつもこの猫。",
+    love:"好き！が全身からあふれ出るタイプ。一緒にいて一番楽しい猫です。",best:"ISTJ"},
+  ENFP:{name:"アビシニアン",epithet:"好奇心の太陽猫",fur:"#c88d5c",inner:"#f5e2ce",eye:"#4a7d54",kw:["情熱","ひらめき","巻き込み力"],
+    desc:"目に入るものすべてが遊び道具。ひらめきと情熱でまわりを巻き込み、気づけばいつも輪の中心にいます。新しい人・新しい場所・新しいアイデアが、この猫のごはんです。",
+    love:"恋に落ちるのは一瞬、燃え上がるのは全力。あなたの世界を2倍に広げてくれます。",best:"INTJ"},
+  ENTP:{name:"シャム",epithet:"議論好きの発明猫",fur:"#e8dcc8",inner:"#f9f2e4",eye:"#3f7fbf",point:"#6b5643",kw:["機知","挑発","頭の回転"],
+    desc:"おしゃべり好きで頭の回転はタイプ随一。あえて逆の意見を言って場をかき回すのも遊びのうちです。退屈がいちばんの天敵で、常に新しい「面白いこと」を発明し続けます。",
+    love:"知的な追いかけっこが恋の形。言い合いすら楽しい相手を探しています。",best:"INFJ"},
+  ESTJ:{name:"アメリカンショートヘア",epithet:"頼れる隊長猫",fur:"#a8b0ba",inner:"#eceef1",eye:"#c98a25",stripes:true,kw:["統率","現実的","実行力"],
+    desc:"現実的で仕切り上手。曖昧なものをきっちり整えるのが得意な、グループの頼れるまとめ役です。決めたことは最後までやり抜き、みんなの「なんとかなる」を「なんとかする」に変えます。",
+    love:"記念日を忘れない、迎えに来てくれる。誠実さで愛を証明するタイプです。",best:"ISFP"},
+  ESFJ:{name:"三毛猫",epithet:"ご近所の世話焼き猫",fur:"#e6d5c0",inner:"#f9f0e3",eye:"#c2802e",mike:true,kw:["世話好き","社交","思いやり"],
+    desc:"面倒見がよく、みんなの様子をいつもよく見ています。差し入れと気配りでコミュニティの平和を守る、地域のアイドル的存在。「みんなが笑ってる」がこの猫の幸せです。",
+    love:"尽くす愛の代表格。あなたの好物を、あなたより覚えています。",best:"ISTP"},
+  ENFJ:{name:"メインクーン",epithet:"大きな導き猫",fur:"#9a7d5f",inner:"#ecdfd0",eye:"#c9a03a",kw:["包容力","カリスマ","育てる力"],
+    desc:"穏やかな巨人。人の可能性を信じて引き出すのが得意で、気づけば自然とみんながついてきます。大きな体（心）で、チーム全体をあたためるリーダーです。",
+    love:"相手の夢を自分の夢のように応援する、器の大きな愛し方をします。",best:"INFP"},
+  ENTJ:{name:"ノルウェージャンフォレストキャット",epithet:"森の王猫",fur:"#7d6b58",inner:"#e5dccf",eye:"#4f8f6f",kw:["決断力","野心","統率"],
+    desc:"生まれながらのリーダー。目標を定めたら、最短ルートで森を駆け抜けます。厳しく見えて、実は仲間思い。頼りがいと突破力は64タイプ中No.1です。",
+    love:"守る力は本物。「ついてこい」と言いながら、ちゃんと歩幅を合わせてくれます。",best:"INTP"}
+};
+const STYLES = {
+  A:{name:"甘えん坊",title:"ひざのり猫",prefix:"甘えん坊な",
+    desc:"人との距離がゼロに近いほど安心するタイプ。素直に「好き」「さみしい」と言えるのは、実はすごい才能です。",
+    combo:"ふだんは{ep}なのに、心を許した相手の前では急にひざの上へ。このギャップこそ最大の魅力です。"},
+  T:{name:"ツンデレ",title:"窓辺のツン猫",prefix:"ツンデレな",
+    desc:"素直じゃないのに視線は雄弁。興味がないふりをしながら、ちゃんと全部見ています。デレた瞬間の破壊力は全スタイル1位。",
+    combo:"{ep}の顔で澄ましていても、好意はしっぽに出ています。バレていないと思っているのは本人だけです。"},
+  H:{name:"ハンター",title:"夜明けの狩り猫",prefix:"狩人気質の",
+    desc:"目標（獲物）を見つけた瞬間のスイッチの入り方が別格。仕事も趣味も恋も、追いかけている時間がいちばん輝きます。",
+    combo:"{ep}の資質に狩人の集中力が加わると、もう誰にも止められません。狙った獲物は逃しません。"},
+  Z:{name:"悟り",title:"日なたの悟り猫",prefix:"悟り系の",
+    desc:"何が起きても、まずひなたぼっこ。慌てない・急かさない・比べない。その余裕がまわりの人を安心させます。",
+    combo:"{ep}でありながら、心はいつも日なたの温度。あなたの「まあ、大丈夫」に救われる人が必ずいます。"}
+};
+const AXES=[["E","I","そとむき","うちむき"],["S","N","現実派","直感派"],["T","F","あたま派","こころ派"],["J","P","きっちり","きまま"]];
+const QUESTIONS=[
+ {t:"お休みの日、理想の過ごし方は？",a:["友だちと集まってわいわい過ごす","E"],b:["おうちでひとり、ぬくぬく過ごす","I"]},
+ {t:"はじめましての人が多い場所では？",a:["じぶんから話しかけにいく","E"],b:["まずすみっこから様子をうかがう","I"]},
+ {t:"元気をチャージする方法は？",a:["人と会っておしゃべりする","E"],b:["ひとりの時間に浸る","I"]},
+ {t:"新しいおもちゃ（ガジェット）を手に入れたら？",a:["説明書を読んで確実に使いこなす","S"],b:["直感でいじりながら可能性を妄想する","N"]},
+ {t:"人と話すとき、多いのは？",a:["実際にあった出来事や具体的な話","S"],b:["アイデアやたとえ話、もしもの話","N"]},
+ {t:"つい考えてしまうのは？",a:["目の前の「今日」のこと","S"],b:["まだ見ぬ「これから」のこと","N"]},
+ {t:"友だちに悩みを相談されたら？",a:["解決策を一緒に考える","T"],b:["まず気持ちにとことん寄り添う","F"]},
+ {t:"だいじなことを決めるとき、たよりにするのは？",a:["すじが通っているかどうか","T"],b:["みんなが幸せかどうか","F"]},
+ {t:"意見がぶつかったとき？",a:["正しい結論をはっきりさせたい","T"],b:["場の空気と関係を守りたい","F"]},
+ {t:"旅行の前は？",a:["計画表をきっちり作る","J"],b:["行き先だけ決めてあとは気分","P"]},
+ {t:"あなたの机の上は？",a:["いつも整理整頓されている","J"],b:["本人にしかわからない創造的な散らかり","P"]},
+ {t:"締め切りとの付き合い方は？",a:["余裕をもって前倒しで終わらせる","J"],b:["追い込まれてからが本気","P"]},
+ {t:"大切な人との理想の距離感は？",o:[["いつもくっついていたい","A"],["好きだけど素直になれない","T"],["一緒に何かへ挑戦していたい","H"],["同じ部屋で別々のことをしていたい","Z"]]},
+ {t:"メッセージの返し方、近いのは？",a:null,o:[["すぐ返す、スタンプ多め","A"],["気になるのに既読のまま置いてしまう","T"],["用件は秒で返す、雑談は気分","H"],["マイペース。数日後に返すことも","Z"]]},
+ {t:"ストレスがたまったら？",o:[["誰かに甘えて癒やされたい","A"],["放っておいてほしい。でも見ていてほしい","T"],["体を動かして発散する","H"],["寝る。すべては寝てから考える","Z"]]},
+ {t:"あなたをうごかす、いちばんのエネルギーは？",o:[["大好きな人の存在","A"],["負けたくないなという気持ち","T"],["ワクワクする目標という名の獲物","H"],["おだやかなこころの平和","Z"]]}
+];
+const STYLE_PAIR={
+ "AA":[12,"おふとんの中で団子になる二匹。互いを甘やかし合う、最高にあたたかいペアです。"],
+ "AT":[8,"甘えたい猫と素直になれない猫。追いかけっこのような関係ですが、ツン側が根負けした日が記念日になります。"],
+ "AH":[6,"狩りに出るハンターを、玄関で待つ甘えん坊。帰る場所があるハンターは最強です。"],
+ "AZ":[9,"甘えたい放題と、それを黙って受け止める日なたの器。実はバランス抜群の組み合わせ。"],
+ "TT":[3,"窓辺の端と端で、互いに素直になれない二匹。進展はゆっくりですが、通じ合った瞬間の絆は誰よりも固い。"],
+ "HT":[7,"ツンの塩対応も、ハンターには燃える獲物。押して押して押しまくる展開になりがちです。"],
+ "TZ":[10,"ツンの裏の照れを、悟り猫はぜんぶお見通し。急かされないから、ツンも安心して少しずつデレられます。"],
+ "HH":[12,"獲物（目標）を共有した瞬間、無敵の狩猟チームに。恋も遊びも全力疾走の二匹です。"],
+ "HZ":[5,"走り回るハンターと、動かない悟り猫。ペースは真逆ですが、休む大切さと挑む楽しさを教え合えます。"],
+ "ZZ":[10,"同じ日なたで、それぞれ好きに寝る。何もしなくても心地よい、老舗夫婦のような安定ペアです。"]
+};
+/* ================= SVG CAT ================= */
+function catSVG(b,size){
+  const fur=b.fur,inner=b.inner,eye=b.eye;
+  const earL=b.fold?'<path d="M56 62 Q52 44 66 46 Q76 48 74 60 Z" fill="'+fur+'"/>':'<path d="M52 66 L58 34 L80 54 Z" fill="'+fur+'"/><path d="M58 60 L61 44 L73 54 Z" fill="'+inner+'"/>';
+  const earR=b.fold?'<path d="M144 62 Q148 44 134 46 Q124 48 126 60 Z" fill="'+fur+'"/>':'<path d="M148 66 L142 34 L120 54 Z" fill="'+fur+'"/><path d="M142 60 L139 44 L127 54 Z" fill="'+inner+'"/>';
+  const stripes=b.stripes?'<path d="M84 52 q4 8 0 14 M100 48 q0 10 0 14 M116 52 q-4 8 0 14" stroke="'+shade(fur)+'" stroke-width="4" fill="none" stroke-linecap="round" opacity=".55"/>':'';
+  const mike=b.mike?'<path d="M60 62 Q78 46 96 58 L92 76 Q74 70 62 78 Z" fill="#c98a3f" opacity=".8"/><path d="M140 62 Q124 48 108 58 L112 76 Q128 70 138 78 Z" fill="#5c5049" opacity=".8"/>':'';
+  const wrinkle=b.bald?'<path d="M76 50 q24 -8 48 0 M80 42 q20 -6 40 0" stroke="'+shade(fur)+'" stroke-width="2.5" fill="none" opacity=".5" stroke-linecap="round"/>':'';
+  return '<svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" style="width:'+(size||'100%')+'">'
+   +'<circle cx="100" cy="88" r="78" fill="'+inner+'" opacity=".45"/>'
+   +earL+earR
+   +'<ellipse cx="100" cy="96" rx="54" ry="48" fill="'+fur+'"/>'
+   +mike+stripes+wrinkle
+   +'<ellipse cx="79" cy="92" rx="7.5" ry="10" fill="'+eye+'"/><ellipse cx="121" cy="92" rx="7.5" ry="10" fill="'+eye+'"/>'
+   +'<ellipse cx="79" cy="92" rx="3" ry="6.5" fill="#2c2824"/><ellipse cx="121" cy="92" rx="3" ry="6.5" fill="#2c2824"/>'
+   +'<circle cx="81" cy="88" r="1.8" fill="#fff"/><circle cx="123" cy="88" r="1.8" fill="#fff"/>'
+   +'<path d="M96 108 L104 108 L100 114 Z" fill="#c98598"/>'
+   +'<path d="M100 114 q0 6 -8 8 M100 114 q0 6 8 8" stroke="#8a7d70" stroke-width="2" fill="none" stroke-linecap="round"/>'
+   +'<path d="M58 104 h-26 M60 112 h-24 M142 104 h26 M140 112 h24" stroke="#b5aa9c" stroke-width="1.8" stroke-linecap="round"/>'
+   +'</svg>';
+}
+function shade(hex){const n=parseInt(hex.slice(1),16);const f=c=>Math.max(0,((n>>c)&255)-46);return "rgb("+f(16)+","+f(8)+","+f(0)+")";}
+/* 生成済みメダリオン画像。thumb=trueで軽量サムネ */
+function catIMG(mbti,thumb){
+  const p=thumb?"../assets/img/thumb/":"../assets/img/";
+  return '<img class="cimg" loading="lazy" src="'+p+'breed_'+mbti.toLowerCase()+'.webp" alt="'+BREEDS[mbti].name+'">';
+}
+const STYLE_IMG={A:"amae",T:"tsun",H:"hunter",Z:"zen"};
+/* ================= STATE ================= */
+let qi=0, answers=[], myCode=null, partnerCode=null, presetMbti=null;
+const $=id=>document.getElementById(id);
+function activeQ(){return presetMbti?QUESTIONS.slice(12):QUESTIONS;}
+function go(v){
+  ["home","quiz","result","compat","types","quick"].forEach(x=>$("view-"+x).classList.add("hidden"));
+  $("view-"+v).classList.remove("hidden");
+  window.scrollTo({top:0});
+  if(v==="compat")initCompat();
+  if(v==="types")renderTypes();
+  if(v==="quick")renderQuick();
+}
+function startQuiz(preset){
+  presetMbti=preset;qi=0;answers=[];
+  go('quiz');renderQ();
+}
+function restart(){startQuiz(null);}
+/* ================= QUICK ================= */
+function renderQuick(){
+  const g=$("quick-grid");
+  if(g.innerHTML)return;
+  g.innerHTML=Object.entries(BREEDS).map(([k,b])=>
+    '<div class="tcard" onclick="startQuiz(\''+k+'\')"><div class="ti">'+catIMG(k,true)+'</div><b>'+k+'</b><span>'+b.name+'</span></div>'
+  ).join("");
+}
+/* ================= QUIZ ================= */
+function renderQ(){
+  const QS=activeQ();
+  const q=QS[qi];
+  $("pbar").style.width=(qi/QS.length*100)+"%";
+  $("qnum").textContent="Q"+(qi+1)+" / "+QS.length+(presetMbti?"（"+presetMbti+"さんの猫スタイルさがし）":"");
+  $("qtext").textContent=q.t;
+  const box=$("opts");box.innerHTML="";
+  const opts=q.o?q.o:[q.a,q.b];
+  opts.forEach(o=>{
+    const btn=document.createElement("button");
+    btn.className="opt";btn.textContent=o[0];
+    btn.onclick=()=>{answers[qi]=o[1];qi++;qi<QS.length?renderQ():finish();};
+    box.appendChild(btn);
+  });
+  $("qback").style.visibility=qi>0?"visible":"hidden";
+}
+function prevQ(){if(qi>0){qi--;renderQ();}}
+function finish(){
+  // 前半12問＝猫種（MBTI軸）、後半4問＝猫スタイル。文字がかぶらないよう別々に集計する
+  const axisAns=presetMbti?[]:answers.slice(0,12);
+  const styleAns=presetMbti?answers:answers.slice(12);
+  const c={};axisAns.forEach(a=>c[a]=(c[a]||0)+1);
+  const sc={};styleAns.forEach(a=>sc[a]=(sc[a]||0)+1);
+  let mbti;
+  if(presetMbti){mbti=presetMbti;}
+  else{mbti="";AXES.forEach(([p,q])=>{mbti+=(c[p]||0)>=(c[q]||0)?p:q;});}
+  const order=["A","T","H","Z"];
+  let style=order[0],max=-1;
+  order.forEach(s=>{if((sc[s]||0)>max){max=sc[s]||0;style=s;}});
+  myCode=mbti+"-"+style;
+  history.replaceState(null,"",location.pathname+"?r="+myCode+(partnerCode?"&p="+partnerCode:""));
+  renderResult(myCode);
+  go('result');
+  $("pbar").style.width="100%";
+}
+/* ================= RESULT ================= */
+function parseCode(code){
+  if(!code)return null;
+  const m=code.match(/^([EI][SN][TF][JP])-([ATHZ])$/);
+  return m&&BREEDS[m[1]]?{mbti:m[1],style:m[2]}:null;
+}
+function axisGauge(mbti){
+  // フル診断のときだけ実回答から計算。近道診断やURL閲覧時はタイプから推定表示
+  const axisAns=(!presetMbti&&answers.length===QUESTIONS.length)?answers.slice(0,12):[];
+  const c={};axisAns.forEach(a=>c[a]=(c[a]||0)+1);
+  return AXES.map(([p,q,pl,ql])=>{
+    const a=c[p]||0,b=c[q]||0;
+    const pct=(a+b)?Math.round(b/(a+b)*100):(mbti.includes(q)?78:22);
+    return '<div class="gauge"><span>'+pl+'（'+p+'）</span><div class="gbar"><i style="left:'+pct+'%"></i></div><span style="text-align:right">'+ql+'（'+q+'）</span></div>';
+  }).join("");
+}
+function renderResult(code){
+  const pc=parseCode(code);if(!pc)return;
+  const b=BREEDS[pc.mbti],s=STYLES[pc.style];
+  const title=s.prefix+b.epithet;
+  $("result-body").innerHTML=
+   '<div class="result-head">'
+   +'<div class="r-style">'+s.title+'スタイル</div>'
+   +'<div class="r-title">『'+title+'』</div>'
+   +'<div class="r-breed">'+b.name+'タイプ（'+pc.mbti+'）</div>'
+   +'<div class="r-code">'+code+'</div>'
+   +'<div class="catbox">'+catIMG(pc.mbti,false)+'</div>'
+   +'<div class="kw">'+b.kw.map(k=>"<span>#"+k+"</span>").join("")+'<span>#'+s.name+'</span></div>'
+   +'</div>'
+   +'<p class="r-desc">'+b.desc+'</p>'
+   +'<div class="sub-h">あなたの猫スタイル ── '+s.name+'</div>'
+   +'<div class="simg"><img loading="lazy" src="../assets/img/thumb/style_'+STYLE_IMG[pc.style]+'.webp" alt="'+s.name+'"></div>'
+   +'<p class="r-desc" style="margin-top:10px">'+s.desc+' '+s.combo.replace("{ep}",b.epithet)+'</p>'
+   +'<div class="sub-h">愛し方のかたち</div><p class="r-desc">'+b.love+'</p>'
+   +'<div class="sub-h">こころのバランス</div><div class="gauges">'+axisGauge(pc.mbti)+'</div>'
+   +'<div class="sub-h">運命のおあいて</div><p class="r-desc">相性ぴったりの猫種は <b>'+BREEDS[b.best].name+'（'+b.best+'）『'+BREEDS[b.best].epithet+'』</b>。下のリンクを気になる人におくって、こたえあわせしてみてね。</p>'
+   +shareHTML(code,title,b.name);
+  if(partnerCode){
+    const comp=compatHTML(code,partnerCode,"届いていた相性診断の結果");
+    $("result-compat").innerHTML=comp?'<div class="rule">ふたりのこたえあわせ</div><div class="card">'+comp+'</div><div class="ad-slot">AD SPACE</div>':"";
+  } else $("result-compat").innerHTML="";
+}
+function shareHTML(code,title,breed){
+  const url=location.origin+location.pathname+"?p="+code;
+  const text="私の猫タイプは『"+title+"』（"+breed+"型）でした🐾 あなたとの相性は？ #ネコグラム #猫タイプ診断";
+  return '<div class="share">'
+   +'<a class="x" href="https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url)+'" target="_blank" rel="noopener">𝕏 でシェア</a>'
+   +'<a class="line" href="https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text)+'" target="_blank" rel="noopener">LINEで送る</a>'
+   +'<button class="copy" onclick="copyLink(\''+code+'\')">相性診断リンクをコピー</button>'
+   +'</div><p style="text-align:center;font-size:.75rem;color:var(--sub);margin-top:10px">リンクをひらいてくれた人が診断をおえると、ふたりの相性がじどうで表示されます。</p>';
+}
+function copyLink(code){
+  const url=location.origin+location.pathname+"?p="+code;
+  navigator.clipboard.writeText(url).then(()=>alert("相性診断リンクをコピーしたよ🐾\n気になる人におくってみてね。"));
+}
+/* ================= COMPAT ================= */
+function compatScore(a,b){
+  const A=parseCode(a),B=parseCode(b);if(!A||!B)return null;
+  let score=46;
+  const ba=BREEDS[A.mbti],bb=BREEDS[B.mbti];
+  if(ba.best===B.mbti)score+=18;
+  score+=A.mbti[1]===B.mbti[1]?12:-10;          // S/N 同じ＝話が合う
+  score+=A.mbti[0]!==B.mbti[0]?7:0;             // E/I 補完
+  score+=A.mbti[3]!==B.mbti[3]?6:0;             // J/P 補完
+  score+=A.mbti[2]===B.mbti[2]?5:0;             // T/F 同じ
+  const key=[A.style,B.style].sort().join("");
+  const sp=STYLE_PAIR[key];
+  score+=sp[0];
+  return {score:Math.max(24,Math.min(100,score)),styleText:sp[1],A,B};
+}
+function scoreLabel(s){
+  if(s>=90)return"運命の毛づくろいペア";
+  if(s>=75)return"最高の相棒";
+  if(s>=60)return"じゃれ合える良コンビ";
+  if(s>=45)return"ゆっくり距離を縮める仲";
+  return"正反対だから学び合えるふたり";
+}
+function compatHTML(a,b,heading){
+  const r=compatScore(a,b);if(!r)return"";
+  const ba=BREEDS[r.A.mbti],bb=BREEDS[r.B.mbti];
+  const sa=STYLES[r.A.style],sb=STYLES[r.B.style];
+  return '<div class="score-wrap">'
+   +(heading?'<div class="r-style" style="margin-bottom:14px">'+heading+'</div>':"")
+   +'<div class="compat-cats">'
+   +'<div><div class="cc">'+catIMG(r.A.mbti,true)+'</div><div class="cc-name">'+sa.prefix+ba.epithet+'<br>（'+r.A.mbti+'-'+r.A.style+'）</div></div>'
+   +'<div class="heart">♥</div>'
+   +'<div><div class="cc">'+catIMG(r.B.mbti,true)+'</div><div class="cc-name">'+sb.prefix+bb.epithet+'<br>（'+r.B.mbti+'-'+r.B.style+'）</div></div>'
+   +'</div>'
+   +'<div class="score-num">'+r.score+'<small> 点</small></div>'
+   +'<div class="score-label">『'+scoreLabel(r.score)+'』</div>'
+   +'<div class="meter"><i style="width:'+r.score+'%"></i></div>'
+   +'<p style="font-size:.9rem;text-align:left">'+r.styleText+'</p>'
+   +'<p style="font-size:.85rem;color:var(--sub);text-align:left;margin-top:10px">'
+   +(ba.best===r.B.mbti||bb.best===r.A.mbti
+     ?"猫種としても運命の組み合わせ。互いにない強みを補い合える、教科書級の好相性です。"
+     :r.A.mbti[1]===r.B.mbti[1]
+       ?"ものの見方（"+(r.A.mbti[1]==="S"?"現実派":"直感派")+"同士）が近く、会話のテンポが合いやすいふたりです。"
+       :"現実派と直感派のペア。見えている世界が違うぶん、相手の視点が新鮮な刺激になります。")
+   +'</p></div>';
+}
+function initCompat(){
+  ["selA","selB"].forEach(pre=>{
+    const bs=$(pre+"-breed"),ss=$(pre+"-style");
+    if(bs.options.length)return;
+    Object.entries(BREEDS).forEach(([k,b])=>bs.add(new Option(b.name+"（"+k+"）",k)));
+    Object.entries(STYLES).forEach(([k,s])=>ss.add(new Option(s.name+"スタイル",k)));
+  });
+  const me=parseCode(myCode);
+  if(me){$("selA-breed").value=me.mbti;$("selA-style").value=me.style;}
+}
+function showCompat(){
+  const a=$("selA-breed").value+"-"+$("selA-style").value;
+  const b=$("selB-breed").value+"-"+$("selB-style").value;
+  $("compat-out").innerHTML=compatHTML(a,b,null);
+}
+/* ================= TYPES ================= */
+function renderTypes(){
+  const g=$("type-grid");
+  if(!g.innerHTML){
+    g.innerHTML=Object.entries(BREEDS).map(([k,b])=>
+      '<div class="tcard" onclick="typeDetail(\''+k+'\')"><div class="ti">'+catIMG(k,true)+'</div><b>'+b.epithet+'</b><span>'+b.name+'<br>'+k+'</span></div>'
+    ).join("");
+  }
+}
+function typeDetail(k){
+  const b=BREEDS[k];
+  $("type-detail").innerHTML='<div class="card" style="margin-top:8px">'
+   +'<div class="result-head"><div class="r-title" style="font-size:1.3rem">『'+b.epithet+'』</div>'
+   +'<div class="r-breed">'+b.name+'（'+k+'）</div>'
+   +'<div class="catbox" style="width:150px">'+catIMG(k,false)+'</div>'
+   +'<div class="kw">'+b.kw.map(x=>"<span>#"+x+"</span>").join("")+'</div></div>'
+   +'<p class="r-desc">'+b.desc+'</p>'
+   +'<div class="sub-h">愛し方のかたち</div><p class="r-desc">'+b.love+'</p>'
+   +'<div class="sub-h">相性のよい猫種</div><p class="r-desc"><b>'+BREEDS[b.best].name+'（'+b.best+'）『'+BREEDS[b.best].epithet+'』</b></p>'
+   +'<div class="center" style="margin-top:16px"><button class="btn ghost" onclick="startQuiz(null)">じぶんのタイプを診断してみる</button>'
+   +' <button class="btn ghost" onclick="startQuiz(\''+k+'\')" style="margin-left:6px">このタイプで4問だけ受ける</button></div>'
+   +'</div>';
+  $("type-detail").scrollIntoView({behavior:"smooth"});
+}
+/* ================= BOOT ================= */
+(function(){
+  const p=new URLSearchParams(location.search);
+  partnerCode=parseCode(p.get("p"))?p.get("p"):null;
+  const r=parseCode(p.get("r"))?p.get("r"):null;
+  if(partnerCode){
+    const pc=parseCode(partnerCode),b=BREEDS[pc.mbti],s=STYLES[pc.style];
+    $("invite-banner").innerHTML='<div class="invite">🐾 <b>『'+s.prefix+b.epithet+'』</b>さんから、相性診断がとどいています。<br>診断がおわると、ふたりの相性がわかりますよ。</div>';
+  }
+  if(r){myCode=r;renderResult(r);go('result');}
+  else if(p.get("v")==="compat")go('compat');
+  else if(p.get("v")==="quick")go('quick');
+})();
+</script>
+</body>
+<!-- NECOGRAM v1.2 / ねこよみ堂 -->
+</html>

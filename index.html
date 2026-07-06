@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ねこよみ堂 | 猫の占いやかた — 性格診断・相性占い・ねこおみくじ</title>
+<meta name="description" content="ねこよみ堂は、森のおくで猫たちがきりもりする、ちいさな占いのやかた。64タイプの猫性格診断「ネコグラム」、相性占い、1日1回のねこおみくじ。登録不要・すべて無料。">
+<meta property="og:title" content="ねこよみ堂 | 猫の占いやかた">
+<meta property="og:description" content="森のおくで猫たちがきりもりする、ちいさな占いのやかた。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nekoyomido.com/assets/img/og_top.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1a15; --bg2:#122019; --panel:#17281f; --panel2:#1c3024;
+  --ink:#e9dfc6; --sub:#a89f88; --mist:#8fa596;
+  --gold:#c9a961; --gold-hi:#e5cd8f; --gold-dim:#7d6a45; --gold-soft:rgba(201,169,97,.12);
+  --line:#33453a; --rose:#c98598; --emerald:#4e8a6a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(233,220,180,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 12%, rgba(233,220,180,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 34%, rgba(233,220,180,.20) 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 64%, rgba(233,220,180,.18) 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 55%, rgba(233,220,180,.22) 50%, transparent 51%),
+    radial-gradient(ellipse 140% 70% at 50% -20%, rgba(78,138,106,.18) 0%, transparent 60%);
+  color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.9;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Shippori Mincho',serif;font-weight:600;letter-spacing:.08em}
+.en{font-family:'Uncial Antiqua',serif;color:var(--gold);letter-spacing:.35em}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:rgba(14,26,21,.85)}
+.head-in{max-width:720px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Shippori Mincho',serif;font-size:1.25rem;letter-spacing:.2em;color:var(--ink)}
+.logo small{font-family:'Uncial Antiqua',serif;font-size:.58rem;color:var(--gold);letter-spacing:.3em;display:block}
+nav a{font-size:.8rem;color:var(--mist);text-decoration:none;margin-left:18px}
+nav a:hover{color:var(--gold-hi)}
+.hero{text-align:center;padding:56px 0 40px}
+.hero .en{font-size:.72rem;margin-bottom:18px;display:block}
+.hero h1{font-size:1.65rem;line-height:1.85;margin-bottom:14px;color:var(--gold-hi);text-shadow:0 0 26px rgba(201,169,97,.25)}
+.hero p{color:var(--sub);font-size:.9rem;max-width:33em;margin:0 auto 24px}
+.ring{width:250px;margin:0 auto 10px;position:relative}
+.hero-art{max-width:560px;margin:0 auto 22px;position:relative}
+.hero-art img{width:100%;border-radius:5px;border:1px solid var(--gold-dim);box-shadow:0 0 40px rgba(201,169,97,.18),0 14px 40px rgba(0,0,0,.5);display:block}
+.hero-art::after{content:"";position:absolute;inset:7px;border:1px solid rgba(201,169,97,.35);border-radius:3px;pointer-events:none}
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.badge{border:1px solid var(--gold-dim);background:transparent;border-radius:999px;padding:3px 16px;font-size:.73rem;color:var(--sub);letter-spacing:.1em}
+.btn{display:inline-block;background:linear-gradient(180deg,#dabf78,#a2803e);color:#181206;border:1px solid var(--gold-hi);border-radius:2px;padding:16px 46px;font-size:1rem;letter-spacing:.18em;cursor:pointer;font-family:'Shippori Mincho',serif;transition:.25s;box-shadow:0 0 24px rgba(201,169,97,.18);text-decoration:none}
+.btn:hover{box-shadow:0 0 34px rgba(201,169,97,.4);transform:translateY(-1px)}
+.hero-sub{display:block;margin-top:16px;font-size:.85rem}
+.hero-sub a{color:var(--gold-hi);text-decoration:none;border-bottom:1px dashed var(--gold-dim)}
+.hero-sub a:hover{color:#fff}
+.drawn-note{margin-top:12px;font-size:.78rem;color:var(--mist)}
+.rule{display:flex;align-items:center;gap:14px;color:var(--gold);font-size:.78rem;letter-spacing:.35em;margin:52px 0 26px;justify-content:center}
+.rule::before,.rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-dim))}
+.rule::after{background:linear-gradient(90deg,var(--gold-dim),transparent)}
+/* menu cards */
+.menu{display:flex;flex-direction:column;gap:16px}
+a.menu-card{display:grid;grid-template-columns:86px 1fr auto;gap:18px;align-items:center;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--gold-dim);border-radius:3px;padding:22px 24px;text-decoration:none;color:var(--ink);transition:.25s;position:relative;box-shadow:inset 0 0 40px rgba(0,0,0,.3)}
+a.menu-card::before{content:"";position:absolute;inset:6px;border:1px solid rgba(201,169,97,.22);border-radius:2px;pointer-events:none}
+a.menu-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:inset 0 0 40px rgba(0,0,0,.3),0 0 30px rgba(201,169,97,.14)}
+.menu-card.soon{pointer-events:none;opacity:.55}
+.mc-icon{width:86px}
+.mc-title{font-family:'Shippori Mincho',serif;font-size:1.05rem;letter-spacing:.08em;color:var(--gold-hi)}
+.mc-title small{display:block;font-family:'Uncial Antiqua',serif;font-size:.6rem;color:var(--gold);letter-spacing:.28em;margin-bottom:3px}
+.mc-desc{font-size:.82rem;color:var(--sub);margin-top:4px}
+.mc-tags{margin-top:7px;display:flex;gap:6px;flex-wrap:wrap}
+.mc-tags span{background:var(--gold-soft);color:var(--gold);border-radius:999px;padding:1px 12px;font-size:.7rem}
+.status{border-radius:2px;padding:4px 14px;font-size:.72rem;letter-spacing:.15em;white-space:nowrap}
+.status.open{background:linear-gradient(180deg,#dabf78,#a2803e);color:#181206;border:1px solid var(--gold-hi)}
+.status.soon{border:1px solid var(--line);color:var(--mist);background:transparent}
+.arrow{color:var(--gold);font-size:1.1rem;margin-left:8px}
+/* ads */
+.ad-slot{border:1px dashed var(--gold-dim);border-radius:3px;min-height:100px;display:flex;align-items:center;justify-content:center;color:#5d6a58;font-size:.7rem;letter-spacing:.25em;margin:36px 0;background:rgba(23,40,31,.5)}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--gold-dim);border-radius:3px;padding:32px 30px;font-size:.92rem;position:relative;box-shadow:inset 0 0 60px rgba(0,0,0,.35)}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,169,97,.25);border-radius:2px;pointer-events:none}
+footer{border-top:1px solid var(--line);margin-top:56px;padding:36px 0 46px;color:var(--sub);font-size:.76rem}
+footer h3{font-size:.85rem;color:var(--ink);margin:18px 0 6px}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--gold)}
+footer a{color:var(--gold)}
+@media(max-width:560px){
+  .hero h1{font-size:1.32rem}
+  a.menu-card{grid-template-columns:64px 1fr;padding:18px}
+  .mc-icon{width:64px}
+  .mc-side{grid-column:1/3;justify-self:end}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="logo">ねこよみ堂<small>nekoyomido</small></div>
+    <nav>
+      <a href="#menu">うらないメニュー</a>
+      <a href="necogram/">ネコグラム</a>
+      <a href="omikuji/">おみくじ</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <span class="en">cat fortune house</span>
+    <div class="hero-art">
+      <img src="assets/img/og_top.webp" alt="森のおくの占いのやかた「ねこよみ堂」">
+    </div>
+    <div class="ring" style="display:none">
+      <svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg">
+        <!-- ケルト結び目のリング -->
+        <circle cx="160" cy="88" r="80" fill="none" stroke="#c9a961" stroke-width="1" opacity=".5" stroke-dasharray="3 5"/>
+        <circle cx="160" cy="88" r="87" fill="none" stroke="#7d6a45" stroke-width="1" opacity=".6"/>
+        <g fill="none" stroke="#c9a961" stroke-width="1.1" opacity=".8">
+          <path d="M160 3 C166 9 166 15 160 21 C154 15 154 9 160 3 Z"/>
+          <path d="M160 155 C166 161 166 167 160 173 C154 167 154 161 160 155 Z"/>
+        </g>
+        <!-- 三日月 -->
+        <path d="M56 26 a18 18 0 1 0 14 28 a14 14 0 1 1 -14 -28 Z" fill="#e5cd8f" opacity=".85"/>
+        <circle cx="262" cy="30" r="2.4" fill="#e5cd8f"/><circle cx="276" cy="44" r="1.6" fill="#c9a961"/><circle cx="252" cy="50" r="1.4" fill="#c9a961"/>
+        <!-- 三匹の看板猫 -->
+        <g transform="translate(30,42) scale(.52)">
+          <path d="M52 66 L58 34 L80 54 Z" fill="#5b6b7f"/><path d="M148 66 L142 34 L120 54 Z" fill="#5b6b7f"/>
+          <ellipse cx="100" cy="96" rx="54" ry="48" fill="#5b6b7f"/>
+          <path d="M72 92 q7 6 14 0 M114 92 q7 6 14 0" stroke="#10100e" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M96 108 L104 108 L100 114 Z" fill="#c98598"/>
+        </g>
+        <g transform="translate(102,26) scale(.6)">
+          <path d="M52 66 L58 34 L80 54 Z" fill="#c2996a"/><path d="M148 66 L142 34 L120 54 Z" fill="#c2996a"/>
+          <ellipse cx="100" cy="96" rx="54" ry="48" fill="#c2996a"/>
+          <ellipse cx="79" cy="92" rx="6.5" ry="9" fill="#3f6b52"/><ellipse cx="121" cy="92" rx="6.5" ry="9" fill="#3f6b52"/>
+          <ellipse cx="79" cy="92" rx="2.6" ry="6" fill="#10100e"/><ellipse cx="121" cy="92" rx="2.6" ry="6" fill="#10100e"/>
+          <path d="M96 108 L104 108 L100 114 Z" fill="#c98598"/>
+          <path d="M100 114 q0 6 -8 8 M100 114 q0 6 8 8" stroke="#6b5f4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(182,42) scale(.52)">
+          <path d="M52 66 L58 34 L80 54 Z" fill="#d8c8ae"/><path d="M148 66 L142 34 L120 54 Z" fill="#42392c"/>
+          <ellipse cx="100" cy="96" rx="54" ry="48" fill="#d8c8ae"/>
+          <path d="M60 62 Q78 46 96 58 L92 76 Q74 70 62 78 Z" fill="#a8763a" opacity=".85"/>
+          <path d="M140 62 Q124 48 108 58 L112 76 Q128 70 138 78 Z" fill="#42392c" opacity=".85"/>
+          <path d="M72 92 q7 6 14 0 M114 92 q7 6 14 0" stroke="#10100e" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M96 108 L104 108 L100 114 Z" fill="#c98598"/>
+        </g>
+      </svg>
+    </div>
+    <h1>森のおくの、ちいさな占いのやかた。</h1>
+    <p>ようこそ、ねこよみ堂へ。ここは月あかりの下、猫たちがあなたのこころをそっとよむ場所。まずは1日1回のおみくじから、どうぞ。</p>
+    <a class="btn" href="omikuji/" id="hero-cta">きょうのねこおみくじをひく</a>
+    <div class="drawn-note" id="hero-note"></div>
+    <span class="hero-sub"><a href="necogram/">あなたの「猫格」をしらべる 64タイプ性格診断はこちら →</a></span>
+    <div class="badges" style="margin-top:26px"><span class="badge">登録なし</span><span class="badge">ぜんぶ無料</span><span class="badge">1分でできる</span></div>
+  </div>
+
+  <!-- AdSense: 審査通過後、この div の中に広告コードを貼り付けてください -->
+  <div class="ad-slot">AD SPACE</div>
+
+  <div class="rule" id="menu">うらないメニュー</div>
+  <div class="menu">
+
+    <a class="menu-card" href="omikuji/">
+      <div class="mc-icon">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="88" r="76" fill="none" stroke="#7d6a45" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <rect x="70" y="52" width="60" height="86" rx="7" fill="#3b2f1f" stroke="#c9a961" stroke-width="2.5"/>
+          <ellipse cx="100" cy="52" rx="30" ry="9" fill="#2a2118" stroke="#c9a961" stroke-width="2"/>
+          <rect x="96" y="24" width="7" height="24" rx="3" fill="#e5cd8f" transform="rotate(12 100 36)"/>
+          <g fill="#c9a961" opacity=".9">
+            <ellipse cx="100" cy="104" rx="9.5" ry="8"/>
+            <circle cx="87" cy="92" r="4"/><circle cx="96" cy="87" r="4"/>
+            <circle cx="104" cy="87" r="4"/><circle cx="113" cy="92" r="4"/>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="mc-title"><small>every day</small>ねこおみくじ</div>
+        <div class="mc-desc">1日1回、森の祠の猫たちが筒をふってくれます。まいにちおまいりすると「連続記録」ものびていきますよ。</div>
+        <div class="mc-tags"><span>#おみくじ</span><span>#1日1回</span><span>#今日の運勢</span></div>
+      </div>
+      <div class="mc-side"><span class="status open" id="omikuji-status">公開中</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="menu-card" href="necogram/">
+      <div class="mc-icon">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="88" r="76" fill="none" stroke="#7d6a45" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <path d="M52 66 L58 34 L80 54 Z" fill="#c2996a"/><path d="M148 66 L142 34 L120 54 Z" fill="#c2996a"/>
+          <ellipse cx="100" cy="96" rx="54" ry="48" fill="#c2996a"/>
+          <ellipse cx="79" cy="92" rx="7" ry="10" fill="#3f6b52"/><ellipse cx="121" cy="92" rx="7" ry="10" fill="#3f6b52"/>
+          <ellipse cx="79" cy="92" rx="2.8" ry="6.5" fill="#10100e"/><ellipse cx="121" cy="92" rx="2.8" ry="6.5" fill="#10100e"/>
+          <path d="M96 108 L104 108 L100 114 Z" fill="#c98598"/>
+        </svg>
+      </div>
+      <div>
+        <div class="mc-title"><small>no.1 popular</small>ネコグラム — 猫タイプ性格診断</div>
+        <div class="mc-desc">16の猫種×4つの猫スタイルで、あなたの「猫格」をみつける64タイプ診断。MBTIを知ってる方は4問だけの近道も。</div>
+        <div class="mc-tags"><span>#性格診断</span><span>#64タイプ</span><span>#約1分</span></div>
+      </div>
+      <div class="mc-side"><span class="status open">公開中</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="menu-card" href="necogram/?v=compat">
+      <div class="mc-icon">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="88" r="76" fill="none" stroke="#7d6a45" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <g transform="translate(-28,14) scale(.62)">
+            <path d="M52 66 L58 34 L80 54 Z" fill="#5b6b7f"/><path d="M148 66 L142 34 L120 54 Z" fill="#5b6b7f"/>
+            <ellipse cx="100" cy="96" rx="54" ry="48" fill="#5b6b7f"/>
+            <path d="M72 92 q7 6 14 0 M114 92 q7 6 14 0" stroke="#10100e" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(104,14) scale(.62)">
+            <path d="M52 66 L58 34 L80 54 Z" fill="#d8c8ae"/><path d="M148 66 L142 34 L120 54 Z" fill="#d8c8ae"/>
+            <ellipse cx="100" cy="96" rx="54" ry="48" fill="#d8c8ae"/>
+            <path d="M72 92 q7 6 14 0 M114 92 q7 6 14 0" stroke="#10100e" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M100 52 c-7 -9 -22 -4 -22 7 c0 9 12 15 22 23 c10 -8 22 -14 22 -23 c0 -11 -15 -16 -22 -7 Z" fill="#c98598"/>
+        </svg>
+      </div>
+      <div>
+        <div class="mc-title">ねこ相性占い</div>
+        <div class="mc-desc">ふたりの猫タイプをえらぶだけで相性がわかります。相性診断リンクをおくれば、こたえあわせも。</div>
+        <div class="mc-tags"><span>#相性</span><span>#恋愛</span><span>#友情</span></div>
+      </div>
+      <div class="mc-side"><span class="status open">公開中</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="menu-card" href="ranking/">
+      <div class="mc-icon">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="88" r="76" fill="none" stroke="#7d6a45" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <rect x="76" y="58" width="48" height="70" fill="#1c3024" stroke="#c9a961" stroke-width="2"/>
+          <rect x="38" y="82" width="38" height="46" fill="#17281f" stroke="#7d6a45" stroke-width="2"/>
+          <rect x="124" y="94" width="38" height="34" fill="#17281f" stroke="#7d6a45" stroke-width="2"/>
+          <text x="100" y="100" text-anchor="middle" font-family="serif" font-size="26" fill="#e5cd8f">1</text>
+          <text x="57" y="112" text-anchor="middle" font-family="serif" font-size="18" fill="#c9a961">2</text>
+          <text x="143" y="120" text-anchor="middle" font-family="serif" font-size="18" fill="#c9a961">3</text>
+          <path d="M88 46 l12 -14 12 14" fill="none" stroke="#e5cd8f" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="mc-title"><small>new</small>ねこ運勢ランキング</div>
+        <div class="mc-desc">星座×血液型で48匹。順位は毎日0時に総入れかえ。きょうのあなたは、なん位でしょう？</div>
+        <div class="mc-tags"><span>#星座×血液型</span><span>#毎日変動</span><span>#48位まで</span></div>
+      </div>
+      <div class="mc-side"><span class="status open">公開中</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="menu-card" href="cards/">
+      <div class="mc-icon">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="88" r="76" fill="none" stroke="#7d6a45" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <rect x="62" y="36" width="56" height="86" rx="5" fill="#17281f" stroke="#c9a961" stroke-width="2" transform="rotate(-8 90 79)"/>
+          <rect x="86" y="42" width="56" height="86" rx="5" fill="#1c3024" stroke="#e5cd8f" stroke-width="2" transform="rotate(7 114 85)"/>
+          <g transform="rotate(7 114 85)" fill="#c9a961">
+            <ellipse cx="114" cy="92" rx="7" ry="6"/>
+            <circle cx="105" cy="83" r="3"/><circle cx="111" cy="79" r="3"/>
+            <circle cx="117" cy="79" r="3"/><circle cx="123" cy="83" r="3"/>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="mc-title"><small>new</small>ねこの森カード</div>
+        <div class="mc-desc">森の猫たちがつたえる36枚の絵札から、1日1枚。きょうのあなたへの「しらせ」をめくって。</div>
+        <div class="mc-tags"><span>#カード占い</span><span>#1日1枚</span><span>#全36枚</span></div>
+      </div>
+      <div class="mc-side"><span class="status open">公開中</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="menu-card" href="numbers/">
+      <div class="mc-icon">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="88" r="76" fill="none" stroke="#7d6a45" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <text x="100" y="106" text-anchor="middle" font-family="serif" font-size="52" fill="#e5cd8f">8</text>
+          <g fill="#c9a961" opacity=".9" transform="translate(36,32) scale(.5)">
+            <ellipse cx="17" cy="20" rx="8" ry="7"/><circle cx="6" cy="11" r="3.4"/><circle cx="13" cy="7" r="3.4"/><circle cx="21" cy="7" r="3.4"/><circle cx="28" cy="11" r="3.4"/>
+          </g>
+          <g fill="#7d6a45" opacity=".9" transform="translate(132,110) scale(.5)">
+            <ellipse cx="17" cy="20" rx="8" ry="7"/><circle cx="6" cy="11" r="3.4"/><circle cx="13" cy="7" r="3.4"/><circle cx="21" cy="7" r="3.4"/><circle cx="28" cy="11" r="3.4"/>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="mc-title"><small>new</small>ねこ数字占い</div>
+        <div class="mc-desc">携帯番号の下4桁をたすだけ。0〜36の「猫数字」が、あなたの持ちあじと運のくせを教えてくれます。</div>
+        <div class="mc-tags"><span>#数字占い</span><span>#携帯下4桁</span></div>
+      </div>
+      <div class="mc-side"><span class="status open">公開中</span><span class="arrow">→</span></div>
+    </a>
+
+    <a class="menu-card soon" href="#">
+      <div class="mc-icon">
+        <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="88" r="76" fill="none" stroke="#7d6a45" stroke-width="1.5" stroke-dasharray="4 6"/>
+          <path d="M100 30 l14 30 33 4 -24 23 6 33 -29 -16 -29 16 6 -33 -24 -23 33 -4 Z" fill="none" stroke="#c9a961" stroke-width="2.5"/>
+          <path d="M136 120 a24 24 0 1 1 -18 -32 a20 20 0 1 0 18 32 Z" fill="#c9a961" opacity=".6"/>
+        </svg>
+      </div>
+      <div>
+        <div class="mc-title">365日たんじょう日ねこ図鑑</div>
+        <div class="mc-desc">お誕生日ごとにきまる「守り猫」の図鑑。あなたの生まれた日の猫は、どんな子でしょう。</div>
+        <div class="mc-tags"><span>#誕生日占い</span><span>#365匹</span></div>
+      </div>
+      <div class="mc-side"><span class="status soon">じゅんびちゅう</span></div>
+    </a>
+
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot">AD SPACE</div>
+
+  <div class="rule">ねこよみ堂について</div>
+  <div class="card">
+    <p>ねこよみ堂は、「猫×占い」をテーマにした無料の占い・診断サイトです。むずかしい登録はいっさいなし、どの占いも1分ほどでたのしめます。あたらしい占いも、猫たちがすこしずつ準備中です。ときどき、月あかりをたよりに、のぞきにきてくださいね。</p>
+    <p style="margin-top:12px;color:var(--sub);font-size:.82rem">※当サイトの占い・診断はエンターテインメントを目的としたコンテンツです。</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">ねこよみ堂<small>nekoyomido</small></div>
+    <p style="margin-top:10px">月あかりの下、猫たちがあなたのこころをそっとよむ占いのやかた。</p>
+    <details>
+      <summary>免責事項・プライバシーポリシー</summary>
+      <h3>免責事項</h3>
+      <p>本サイトの占い・診断はエンターテインメントを目的としたものであり、心理学的評価・医学的診断を行うものではありません。MBTI®はThe Myers-Briggs Companyの登録商標であり、本サイトとは一切関係ありません。</p>
+      <h3>プライバシーポリシー</h3>
+      <p>本サイトは回答内容をサーバーに送信・保存しません。診断はすべてお使いのブラウザ内で完結します。本サイトでは第三者配信の広告サービス（Google AdSense等）を利用しており、広告配信事業者はCookieを使用して利用者の興味に応じた広告を表示することがあります。Googleによるデータの取り扱いは「広告 – ポリシーと規約 – Google」をご確認ください。パーソナライズ広告は<a href="https://adssettings.google.com">広告設定</a>から無効化できます。</p>
+      <h3>お問い合わせ</h3>
+      <p>サイトに関するお問い合わせは運営者までご連絡ください。</p>
+    </details>
+    <p style="margin-top:20px">© 2026 ねこよみ堂</p>
+  </div>
+</footer>
+
+<script>
+/* きょうのおみくじ状態をTOPに反映（同一オリジンのlocalStorageを参照） */
+(function(){
+  const NAMES={nekodai:"猫大吉",dai:"大吉",chu:"中吉",sho:"小吉",kichi:"吉",han:"半吉",sue:"末吉",kyo:"凶"};
+  function todayKey(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem("nekomikuji")||"null");}catch(e){}
+  const cta=document.getElementById("hero-cta"),note=document.getElementById("hero-note"),st=document.getElementById("omikuji-status");
+  if(saved&&saved.date===todayKey()&&NAMES[saved.k]){
+    cta.textContent="きょうの結果をみる 『"+NAMES[saved.k]+"』";
+    note.textContent="きょうはもうおまいり済み。また、あしたもどうぞ。";
+    if(st)st.textContent="きょうは『"+NAMES[saved.k]+"』";
+  }else{
+    note.textContent="きょうのぶんは、まだひけますよ。";
+  }
+})();
+</script>
+</body>
+<!-- NEKOYOMIDO top v2.1 celtic -->
+</html>

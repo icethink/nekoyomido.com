@@ -1,0 +1,7 @@
+# 選定・生成の作業ファイル（公開しない）
+assets/review/
+# 手動アップロード用の複製（Git運用では不要）
+_deploy/
+# OSゴミ
+Thumbs.db
+.DS_Store

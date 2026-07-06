@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ねこおみくじ | 1日1回、猫たちがふるおみくじ | ねこよみ堂</title>
+<meta name="description" content="1日1回だけひける、猫たちのおみくじ。今日のあなたの運勢と、ねこ神さまからのひとことを。無料・登録不要。">
+<meta property="og:title" content="ねこおみくじ | 1日1回、猫たちがふるおみくじ">
+<meta property="og:description" content="今日のあなたの運勢は？ねこ神さまからのひとことつき。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nekoyomido.com/assets/img/og_omikuji.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1a15; --bg2:#122019; --panel:#17281f; --panel2:#1c3024;
+  --ink:#e9dfc6; --sub:#a89f88; --mist:#8fa596;
+  --gold:#c9a961; --gold-hi:#e5cd8f; --gold-dim:#7d6a45; --gold-soft:rgba(201,169,97,.12);
+  --line:#33453a; --rose:#c98598; --emerald:#4e8a6a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(233,220,180,.35) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 12%, rgba(233,220,180,.28) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 55% 34%, rgba(233,220,180,.20) 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 64%, rgba(233,220,180,.18) 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 55%, rgba(233,220,180,.22) 50%, transparent 51%),
+    radial-gradient(ellipse 140% 70% at 50% -20%, rgba(78,138,106,.18) 0%, transparent 60%);
+  color:var(--ink);font-family:'Noto Sans JP',sans-serif;line-height:1.9;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Shippori Mincho',serif;font-weight:600;letter-spacing:.08em}
+.en{font-family:'Uncial Antiqua',serif;color:var(--gold);letter-spacing:.35em}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px}
+header{border-bottom:1px solid var(--line);background:rgba(14,26,21,.85)}
+.head-in{max-width:680px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Shippori Mincho',serif;font-size:1.2rem;letter-spacing:.2em;color:var(--ink);text-decoration:none}
+.logo small{font-family:'Uncial Antiqua',serif;font-size:.58rem;color:var(--gold);letter-spacing:.3em;display:block}
+nav a{font-size:.8rem;color:var(--mist);text-decoration:none;margin-left:18px}
+nav a:hover{color:var(--gold-hi)}
+.crumb{max-width:680px;margin:0 auto;padding:10px 20px 0;font-size:.72rem;color:var(--sub)}
+.crumb a{color:var(--gold);text-decoration:none}
+.hero{text-align:center;padding:52px 0 30px}
+.hero .en{font-size:.72rem;margin-bottom:16px;display:block}
+.hero h1{font-size:1.6rem;line-height:1.8;margin-bottom:14px;color:var(--gold-hi);text-shadow:0 0 24px rgba(201,169,97,.25)}
+.hero p{color:var(--sub);font-size:.9rem;max-width:32em;margin:0 auto}
+.rule{display:flex;align-items:center;gap:14px;color:var(--gold);font-size:.78rem;letter-spacing:.35em;margin:50px 0 26px;justify-content:center}
+.rule::before,.rule::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold-dim))}
+.rule::after{background:linear-gradient(90deg,var(--gold-dim),transparent)}
+.card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--gold-dim);border-radius:3px;padding:36px 30px;position:relative;box-shadow:inset 0 0 60px rgba(0,0,0,.35),0 10px 40px rgba(0,0,0,.4)}
+.card::before{content:"";position:absolute;inset:7px;border:1px solid rgba(201,169,97,.28);border-radius:2px;pointer-events:none}
+.knot{display:block;margin:0 auto}
+.btn{display:inline-block;background:linear-gradient(180deg,#dabf78,#a2803e);color:#181206;border:1px solid var(--gold-hi);border-radius:2px;padding:15px 54px;font-size:1rem;letter-spacing:.22em;cursor:pointer;font-family:'Shippori Mincho',serif;transition:.25s;box-shadow:0 0 24px rgba(201,169,97,.18)}
+.btn:hover{box-shadow:0 0 34px rgba(201,169,97,.4);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--gold-hi);border:1px solid var(--gold-dim);padding:12px 30px;font-size:.85rem;box-shadow:none}
+.btn.ghost:hover{border-color:var(--gold);background:var(--gold-soft)}
+.center{text-align:center}
+.hidden{display:none}
+/* mood questions */
+.mq-num{color:var(--gold);font-size:.72rem;letter-spacing:.35em;text-align:center;margin-bottom:10px}
+.mq-text{font-family:'Shippori Mincho',serif;font-size:1.1rem;text-align:center;margin-bottom:24px;line-height:1.9;color:var(--ink)}
+.mq-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:440px;margin:0 auto}
+.mq-opt{background:rgba(28,48,36,.55);border:1px solid var(--line);border-radius:3px;padding:14px 12px;cursor:pointer;color:var(--ink);font-size:.88rem;transition:.2s;text-align:center;font-family:inherit;line-height:1.6}
+.mq-opt:hover{border-color:var(--gold);background:var(--gold-soft);box-shadow:0 0 16px rgba(201,169,97,.12)}
+.mq-dots{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+.mq-dots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:.3s}
+.mq-dots i.on{background:var(--gold);box-shadow:0 0 8px rgba(201,169,97,.6)}
+/* mood result */
+.mood-box{border:1px solid var(--gold-dim);background:var(--gold-soft);padding:18px 22px;border-radius:3px;font-size:.9rem;max-width:460px;margin:0 auto 26px;line-height:2}
+.mood-box b{font-family:'Shippori Mincho',serif;color:var(--gold);display:block;margin-bottom:6px;letter-spacing:.12em;font-size:.82rem}
+/* box animation */
+.mikuji-box{width:150px;margin:8px auto 20px;transition:.2s}
+.shaking{animation:shake .9s ease-in-out infinite}
+@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-9deg) translateY(-4px)}40%{transform:rotate(8deg)}60%{transform:rotate(-7deg) translateY(-3px)}80%{transform:rotate(6deg)}}
+/* result */
+.rank-label{font-size:.75rem;color:var(--gold);letter-spacing:.4em;text-align:center;margin-bottom:8px}
+.rankimg{width:210px;margin:0 auto 14px}
+.rankimg img{width:100%;border-radius:8px;border:1px solid var(--gold-dim);box-shadow:0 0 26px rgba(201,169,97,.2)}
+.rank{font-family:'Shippori Mincho',serif;font-size:3rem;text-align:center;color:var(--gold-hi);text-shadow:0 0 30px rgba(201,169,97,.35);line-height:1.4;margin-bottom:4px}
+.rank-sub{text-align:center;color:var(--sub);font-size:.82rem;letter-spacing:.2em;margin-bottom:22px}
+.omsg{font-size:.95rem;text-align:center;max-width:30em;margin:0 auto 26px;line-height:2.1}
+.orows{border-top:1px solid var(--line);max-width:430px;margin:0 auto}
+.orow{display:grid;grid-template-columns:8.5em 1fr;gap:14px;padding:12px 4px;border-bottom:1px solid var(--line);font-size:.88rem;align-items:baseline}
+.orow b{font-family:'Shippori Mincho',serif;color:var(--gold);font-weight:600;letter-spacing:.15em;font-size:.8rem}
+.again{text-align:center;color:var(--mist);font-size:.78rem;margin-top:22px}
+.share{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.share a{border-radius:2px;padding:11px 26px;font-size:.85rem;text-decoration:none;cursor:pointer;border:1px solid var(--gold-dim);background:transparent;color:var(--ink);transition:.2s}
+.share a:hover{border-color:var(--gold);background:var(--gold-soft)}
+.share .line{background:#06c755;color:#fff;border-color:#06c755}
+.ad-slot{border:1px dashed var(--gold-dim);border-radius:3px;min-height:100px;display:flex;align-items:center;justify-content:center;color:#5d6a58;font-size:.7rem;letter-spacing:.25em;margin:34px 0;background:rgba(23,40,31,.5)}
+footer{border-top:1px solid var(--line);margin-top:56px;padding:36px 0 46px;color:var(--sub);font-size:.76rem}
+footer h3{font-size:.85rem;color:var(--ink);margin:18px 0 6px}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--gold)}
+footer a{color:var(--gold)}
+@media(max-width:560px){.hero h1{font-size:1.3rem}.rank{font-size:2.4rem}.orow{grid-template-columns:7em 1fr}}
+@media(max-width:430px){.mq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <a class="logo" href="../">ねこよみ堂<small>nekoyomido</small></a>
+    <nav>
+      <a href="../">うらないTOP</a>
+      <a href="../necogram/">ネコグラム</a>
+    </nav>
+  </div>
+</header>
+<div class="crumb"><a href="../">ねこよみ堂</a> ＞ ねこおみくじ</div>
+
+<main class="wrap">
+
+  <div class="hero">
+    <span class="en">neko - omikuji</span>
+    <h1>ねこおみくじ</h1>
+    <p>森のおくの祠には、ふしぎな猫たちがすんでいます。1日にいちどだけ、あなたのために筒をふってくれますよ。</p>
+  </div>
+
+  <div class="card">
+    <!-- ひく前 -->
+    <div id="draw-view">
+      <svg class="knot" width="52" height="52" viewBox="0 0 40 40" fill="none" stroke="#c9a961" stroke-width="1.3">
+        <path d="M20 5 C27 12 27 20 20 27 C13 20 13 12 20 5 Z"/>
+        <path d="M20 5 C27 12 27 20 20 27 C13 20 13 12 20 5 Z" transform="rotate(120 20 17.5)"/>
+        <path d="M20 5 C27 12 27 20 20 27 C13 20 13 12 20 5 Z" transform="rotate(240 20 17.5)"/>
+        <circle cx="20" cy="18" r="15.5" opacity=".45"/>
+      </svg>
+      <div class="mikuji-box" id="box">
+        <svg viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#2a2118"/><stop offset=".5" stop-color="#4a3a26"/><stop offset="1" stop-color="#241c14"/>
+            </linearGradient>
+          </defs>
+          <rect x="55" y="60" width="90" height="130" rx="10" fill="url(#wood)" stroke="#c9a961" stroke-width="2"/>
+          <ellipse cx="100" cy="60" rx="45" ry="14" fill="#3b2f1f" stroke="#c9a961" stroke-width="2"/>
+          <ellipse cx="100" cy="60" rx="14" ry="5" fill="#0e0b07" stroke="#c9a961" stroke-width="1"/>
+          <rect x="96" y="18" width="8" height="34" rx="3" fill="#e5cd8f" transform="rotate(14 100 35)"/>
+          <!-- 肉球紋 -->
+          <g fill="#c9a961" opacity=".9">
+            <ellipse cx="100" cy="132" rx="13" ry="11"/>
+            <circle cx="82" cy="116" r="5.5"/><circle cx="94" cy="109" r="5.5"/>
+            <circle cx="106" cy="109" r="5.5"/><circle cx="118" cy="116" r="5.5"/>
+          </g>
+          <path d="M67 168 h66 M67 176 h66" stroke="#c9a961" stroke-width="1" opacity=".5"/>
+        </svg>
+      </div>
+      <p style="text-align:center;color:var(--sub);font-size:.88rem;margin-bottom:24px" id="draw-note">猫たちが、きょうのあなたの気分を5つだけききます。<br>こたえおわると、筒をふってくれますよ。</p>
+      <div class="center"><button class="btn" id="draw-btn" onclick="startMq()">おまいりをはじめる</button></div>
+    </div>
+
+    <!-- 気分の5問 -->
+    <div id="mq-view" class="hidden">
+      <div class="mq-dots" id="mq-dots"></div>
+      <div class="mq-num" id="mq-num"></div>
+      <div class="mq-text" id="mq-text"></div>
+      <div class="mq-opts" id="mq-opts"></div>
+    </div>
+
+    <!-- 結果 -->
+    <div id="result-view" class="hidden">
+      <div class="rank-label" id="r-date"></div>
+      <div class="rankimg"><img id="r-img" alt=""></div>
+      <div class="rank" id="r-rank"></div>
+      <div class="rank-sub" id="r-read"></div>
+      <p class="omsg" id="r-msg"></p>
+      <div class="mood-box hidden" id="r-mood"></div>
+      <div class="orows">
+        <div class="orow"><b>ねこ神さまのことば</b><span id="r-word"></span></div>
+        <div class="orow"><b>きょうのたからもの</b><span id="r-item"></span></div>
+        <div class="orow"><b>きょうの色</b><span id="r-color"></span></div>
+        <div class="orow"><b>そっとひとこと</b><span id="r-hint"></span></div>
+        <div class="orow"><b>おまいり記録</b><span id="r-streak"></span></div>
+      </div>
+      <div class="share" id="r-share"></div>
+      <p class="again" id="r-again">つぎのおみくじは、あしたひけますよ。よい一日を。</p>
+    </div>
+  </div>
+
+  <!-- AdSense: 結果の下は最も読まれる枠です -->
+  <div class="ad-slot">AD SPACE</div>
+
+  <div class="center">
+    <a class="btn ghost" href="../necogram/" style="text-decoration:none">あなたの猫タイプも占う →</a>
+  </div>
+
+  <div class="rule">ねこおみくじについて</div>
+  <div class="card" style="font-size:.9rem">
+    <p>ねこおみくじは、1日1回だけひける猫たちのおみくじです。まず、きょうの気分を5つだけきかれます。こたえると猫たちが筒をふって、運勢といっしょに「きょうのあなたの気分にあわせたひとこと」をそえてくれますよ。運勢は八段階。いちばんうえは、めったにでない「猫大吉」。凶がでた日も、猫たちがちゃんとそばにいてくれるので、だいじょうぶ。</p>
+    <p style="margin-top:10px;color:var(--sub);font-size:.8rem">※おみくじの結果はお使いの端末にだけ記録され、サーバーには送信されません。</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="font-family:'Shippori Mincho',serif;font-size:1.1rem;letter-spacing:.2em">ねこよみ堂</div>
+    <p style="margin-top:10px">ねこおみくじは、猫の占いやかた「<a href="../">ねこよみ堂</a>」のコンテンツです。</p>
+    <details>
+      <summary>免責事項・プライバシーポリシー</summary>
+      <h3>免責事項</h3>
+      <p>本サイトの占い・診断はエンターテインメントを目的としたものであり、心理学的評価・医学的診断を行うものではありません。</p>
+      <h3>プライバシーポリシー</h3>
+      <p>本サイトは回答・結果をサーバーに送信・保存しません（結果はお使いのブラウザ内にのみ保存されます）。本サイトでは第三者配信の広告サービス（Google AdSense等）を利用しており、広告配信事業者はCookieを使用して利用者の興味に応じた広告を表示することがあります。パーソナライズ広告は<a href="https://adssettings.google.com">広告設定</a>から無効化できます。</p>
+    </details>
+    <p style="margin-top:20px">© 2026 ねこよみ堂</p>
+  </div>
+</footer>
+
+<script>
+/* ================= DATA ================= */
+const RANKS=[
+ {k:"nekodai",name:"猫大吉",read:"ねこだいきち",w:3,
+  msg:"ねこ神さまのおとおりです。ねがいごとは、まっすぐ空へとどくでしょう。今日であったものは、ぜんぶ味方。だいじな一歩は、今日ふみだして。",
+  word:"「ひなたは、ぜんぶあなたのもの」"},
+ {k:"dai",name:"大吉",read:"だいきち",w:12,
+  msg:"しっぽがぴんと立つような、よろこびのしらせ。まよっていたことに、こたえが見つかりそう。じぶんのカンを信じてすすんで。",
+  word:"「その足音、まちがいないよ」"},
+ {k:"chu",name:"中吉",read:"ちゅうきち",w:20,
+  msg:"あたたかい風のふく日。がんばりすぎず、でも一歩だけ前へ。ちいさな親切が、あとでおおきくかえってきます。",
+  word:"「毛づくろいも、だいじな仕事」"},
+ {k:"sho",name:"小吉",read:"しょうきち",w:20,
+  msg:"しずかで、おだやかな運気。はでなことはおきないけれど、それがいちばんのしあわせだったりします。ていねいにくらして。",
+  word:"「まるくなって、ちからをためて」"},
+ {k:"kichi",name:"吉",read:"きち",w:18,
+  msg:"ゆっくりのぼる朝日のような日。あせらなくてだいじょうぶ。きのうよりひとつだけ、うまくできればじゅうぶんです。",
+  word:"「ひとやすみも、みちのうち」"},
+ {k:"han",name:"半吉",read:"はんきち",w:12,
+  msg:"よいことと、ちょっとしたつまずきが半分こ。でも、つまずいた場所にこそ、みつけものがあるみたい。足もとをよく見て。",
+  word:"「ころんだ先に、またたびが」"},
+ {k:"sue",name:"末吉",read:"すえきち",w:10,
+  msg:"いまはまだ、つぼみの時間。むりにひらこうとしなくていいのです。あたたかくして、ゆっくり待つが吉。",
+  word:"「ふゆの次は、かならず春」"},
+ {k:"kyo",name:"凶",read:"きょう",w:5,
+  msg:"今日はすこし、雲のおおい日かもしれません。でも、だいじょうぶ。猫たちがちゃんとそばにいます。あたたかいものをのんで、はやめにおやすみ。あしたのおみくじは、きっとちがう顔をしています。",
+  word:"「雨の日は、いっしょに寝よう」"}
+];
+const ITEMS=["ねこじゃらし","まるいクッション","あたたかいミルク","銀のスプーン","みどりの小石","ふるい本","木のくし","白い羽根","ちいさな鈴","月あかり","湯たんぽ","ハーブティー","かぎしっぽのお守り","窓辺の植物"];
+const COLORS=["月白（げっぱく）","深緑（ふかみどり）","金茶（きんちゃ）","菫色（すみれいろ）","茜（あかね）","銀鼠（ぎんねず）","琥珀（こはく）","若草（わかくさ）","藍（あい）","桜鼠（さくらねず）"];
+/* ---- 気分の5問 ---- */
+const MQ=[
+ {t:"けさの目ざめは、どうでしたか？",o:[["すっきり！しっぽピン",3],["まあまあ、のび〜っと",2],["ちょっとねむい…",1],["ずっとお布団にいたい",0]]},
+ {t:"いまの、こころのお天気は？",o:[["快晴",3],["うすぐもり",2],["雨もよう",1],["ちょっと嵐ぎみ",0]]},
+ {t:"きょうのエネルギーは、どのくらい？",o:[["満タン",3],["ほどほど",2],["省エネモード",1],["ほぼからっぽ",0]]},
+ {t:"きょう、いちばん気になっているのは？",o:[["恋・人間関係","love"],["しごと・勉強","work"],["お金のこと","money"],["からだと健康","health"]]},
+ {t:"きょうは、どんな一日にしたい？",o:[["なにかに挑戦したい","challenge"],["のんびりしたい","slow"],["たまったものを片づけたい","tidy"],["とにかく癒やされたい","heal"]]}
+];
+const MOOD_LABELS=["小雨、毛づくろい日和","うすぐもり、ときどき日なた","快晴、しっぽピン日和"];
+/* アドバイスは各8パターン。日づけでローテーションするので、毎日ちがう文にあたる */
+const ADVICE={
+ love:[
+  [ // お疲れ
+  "疲れたこころで人の気持ちを読むと、悪いほうにかたむきがち。きょうは深読みをおやすみして、あたたかくして眠るが吉。",
+  "返事がこない夜は、相手もねむいだけかもしれません。結論を出すのは、あしたの日なたで。",
+  "きょうは「会う」より「思い出す」日。やさしくされた記憶を、湯たんぽがわりにどうぞ。",
+  "無理にわらわなくて、だいじょうぶ。ほんとうの味方は、しずかな顔のあなたのことも好きです。",
+  "さみしさは、こころが「休んで」と鳴いている声。まず、じぶんをたっぷり甘やかして。",
+  "きょうのすれちがいは、たぶんおたがい寝不足のせい。白湯をのんで、ひと晩おいてみて。",
+  "人づきあいの糸は、ゆるめても切れません。きょうはすこし、たるませておきましょう。",
+  "やさしい言葉をひとつだけ、じぶんに向けて。それが、あしたの恋の体力になります。"],
+  [ // ふつう
+  "がんばって会いにいくより、そばにいてくれる人をたいせつに。「ありがとう」をひとつ伝えられたら、きょうはじゅうぶん。",
+  "気になるあの人へは、用事にかこつけたひとことが吉。天気の話でも、猫の話でも。",
+  "きょうは聞き役の日。相手の話に耳をぴんと立てると、距離がひとつ縮まります。",
+  "ひさしぶりの人の顔がふと浮かんだら、それが合図。みじかい便りを送ってみて。",
+  "じぶんから誘うのがすこし怖い日は、「今度ね」を「今週ね」に変えるだけで前進です。",
+  "相手のちいさな変化にひとつ気づいて、くちに出してみて。「髪切った？」は魔法のことば。",
+  "きょう結ばれる縁は、細くてもながく続く糸。あわてず、ゆっくりより合わせて。",
+  "笑顔はしっぽとおなじで、正直もの。つくらなくても、ゆるめるだけでいいのです。"],
+  [ // げんき
+  "その元気があれば、気になるあの人にひとこと送るのにぴったりの日。かるい挨拶が、思いのほか遠くまでとどきます。",
+  "きょうのあなたは、ひなたの匂いがするみたい。人がよってくるのも、しかたなし。",
+  "誘われるのを待つより、誘う側にまわると吉。だめでも、しっぽは減りません。",
+  "会いたい人の名前を、あたまにひとりだけ浮かべて。きょうは、その直感が正解です。",
+  "ほめことばを出しおしみしない日。思ったことの倍つたえて、ちょうどいいくらい。",
+  "あたらしい出会いの気配あり。いつもの帰り道を、ひと筋だけ変えてみて。",
+  "元気なあなたに、甘えたい人がいます。きょうは大きな木のつもりで、どっしりと。",
+  "恋も友情も、追いかけると逃げるもの。きょうは楽しそうにしていれば、向こうから来ます。"]
+ ],
+ work:[
+  [
+  "きょうは省エネ運転の日。むずかしい判断とだいじな返事は、できればあしたの朝のじぶんに任せて。",
+  "やることリストの、いちばん下の三つに二重線を。それは「やらないことリスト」です。",
+  "集中できないのは、なまけではなく電池ぎれ。15分の目とじは、猫のたしなみです。",
+  "きょうの60点は、元気な日の90点とおなじ値打ち。じぶんの採点を、すこし甘くして。",
+  "むずかしいメールは、下書きまででOK。送信ボタンは、朝の指のほうがかしこい。",
+  "机の上をすこし片づけるだけで、きょうの仕事はもう半分おわったようなもの。",
+  "「たすけて」は、立派な仕事の技術。ひとつだけ、だれかに預けてみましょう。",
+  "終わらなかった仕事は、あしたのじぶんへの申し送り。書き置きだけして、店じまい。"],
+  [
+  "ぜんぶ終わらせようとしなくて、だいじょうぶ。「これだけは」をひとつ決めて、できたら花まるです。",
+  "いつもの仕事に、ひと工夫だけ足してみる日。道具の置き場所を変えるのでも立派です。",
+  "午前は狩り、午後は毛づくろい。だいじな作業は、はやめの時間にすませて。",
+  "こまった問題は、声に出して読むと半分ほどけます。ひとりごとは、猫も得意です。",
+  "きょうの評価より、きょうの積み上げ。ちいさな一段が、来月のあなたを乗せます。",
+  "となりの人の仕事をひとつ手伝うと、まわりまわって助けられる日です。",
+  "迷ったら「はやい」より「ていねい」を。爪は、ゆっくり研ぐほど鋭くなります。",
+  "休憩の合図は、時計にきめてもらって。がんばりやの猫ほど、忘れるので。"],
+  [
+  "いちばん重たい仕事に、朝のうちに爪を立てて。きょうのあなたの集中力は、狩りの朝の猫なみです。",
+  "あとまわしの箱の底から、ひとつ取り出して片づける日。きょうならば、勝てます。",
+  "アイデアがわく日。浮かんだものは、逃げないうちにぜんぶメモの籠へ。",
+  "発言のチャンスがきたら、迷わずまえ足を上げて。きょうの声は、よく通ります。",
+  "手ごわい相手との相談ごとも、きょうは追い風。ただし、笑顔の毛づくろいを忘れずに。",
+  "勢いのある日ほど、確認はひと呼吸おいて。飛びのる前に、着地点をみる。",
+  "あたらしい道具ややり方をためすのに最適の日。好奇心が、そのまま仕事になります。",
+  "きょうのがんばりは、ちゃんとだれかが見ています。見ていなくても、あしたのじぶんが見ています。"]
+ ],
+ money:[
+  [
+  "お疲れの日の買いものは、こころのすきまを埋めがち。きょうは財布より、湯船とお布団にぜいたくを。",
+  "ポチる前に、かごの中でひと晩ねかせて。朝の目でみると、半分は消えていきます。",
+  "きょうの「ごほうび」は、値段のつかないものから。散歩、昼寝、あたたかいお茶。",
+  "セールの文字は、疲れた目にはまぶしすぎます。きょうは見ない、が最強の節約。",
+  "お金の心配ごとは、夜にふくらむ生きもの。考えるのは、あしたの午前中に予約を。",
+  "コンビニによる回数を、きょうだけひとつ減らしてみて。それでじゅうぶんです。",
+  "「もったいなかった」は「勉強代だった」に言いかえて。こころの帳簿は、それで黒字。",
+  "財布の中をととのえるだけでも、金運の毛なみはととのいます。古いレシートにお別れを。"],
+  [
+  "こまかい出費をひとつ見なおすと、気持ちまで軽くなりそう。お金の整理は、こころの毛づくろいでもあります。",
+  "つかっていない定額サービスがないか、ちらりと点検を。眠っている小銭がみつかるかも。",
+  "きょうは「安いから買う」を「使うから買う」に言いかえる日です。",
+  "ちいさな貯金箱をはじめるのに良い日。硬貨一枚も、つもれば山になります。",
+  "ひとにおごる・おごられるが吉の日。お金は、まわすと機嫌がよくなります。",
+  "ほしいものを書きだして、順番をつけて。一位のほかは、来月のたのしみに。",
+  "家計の記録は、三日ぼうずでもえらい。きょう一日ぶんだけ、つけてみて。",
+  "お金の話を、信頼できる人とひとつだけ。口に出すと、こんがらがりがほどけます。"],
+  [
+  "元気な日ほど、財布のひもはゆるむもの。「ほしい！」は、ひと晩ねかせてからでも遅くありません。",
+  "きょうは稼ぐ知恵がわく日。ほしいものより「ふやし方」を調べると吉。",
+  "気前がよくなる日。ごちそうするなら、金額より「だれと」をだいじに。",
+  "大きな買いものの下調べに最適。ただし、きょうは調べるだけ。買うのは別の日に。",
+  "じぶんへの投資（本・学び・道具）なら、きょうの財布はよくはたらきます。",
+  "つかっていないものを、ゆずったり売ったりするのに吉。あなたの「いらない」は、だれかの「ほしい」。",
+  "勢いで大きな契約だけはしないこと。元気な日の即決は、猫の高とびなみに危ない。",
+  "お金の目標をひとつ、声に出してみて。きょうの決意は、しっぽが立つほど強いのです。"]
+ ],
+ health:[
+  [
+  "きょうのあなたのお仕事は、休むことです。それはサボりではなく、あしたのための狩りのじゅんび。",
+  "「なんとなく不調」は、体からのちいさな手紙。白湯をのんで、いつもより30分はやくお布団へ。",
+  "肩とあごの力を、いま、ふっとぬいてみて。猫はいつも、そうしています。",
+  "きょうの運動は、のびをみっつ。それ以上は、しなくてよろしい。",
+  "目をつかいすぎの気配。窓の外のいちばん遠くを、ぼんやりながめる時間を。",
+  "食欲のない日は、あたたかくてやわらかいものを。おかゆは、にんげんのごちそうです。",
+  "湯船に肩までつかって、きょうあった嫌なことを三つ、湯気にして逃がしましょう。",
+  "眠れない夜は、羊ではなく猫を数えて。三毛、白、黒、はちわれ…だいたい七匹目で。"],
+  [
+  "「なんとなく元気」も、立派な健康です。この調子をたもつ工夫を、ひとつだけ。",
+  "きょうは階段をつかう日。のぼった段の数だけ、運もすこし積み上がります。",
+  "水分がすこし足りていない気配。あたたかいお茶をいっぱい、ゆっくりどうぞ。",
+  "姿勢をととのえると、気分もととのいます。背のびして、猫のポーズをひとつ。",
+  "夜ふかしの誘惑に、きょうは勝てる日。お布団のなかのスマホは10分まで。",
+  "甘いものは、いちばんおいしい一個だけ。二個目は、あしたのたのしみに。",
+  "散歩にいい日。目的地をきめず、日なたのあるほうへ足をむけてみて。",
+  "からだの声をきく日。「痛い」「重い」がつづく場所があれば、はやめにお医者さんへ。"],
+  [
+  "体を動かすには最高の日。ただし、はしゃぎすぎた猫は着地に失敗します。じゅんび運動だけ忘れずに。",
+  "元気があまる日は、すこし遠くまで散歩を。帰り道のぶんだけ、余力をのこして。",
+  "あたらしい運動をはじめるのに吉日。つづける秘訣は「毎日」より「気楽に」。",
+  "その元気、夜までもちこすと寝つけなくなる予感。夕方にひと汗かいておくと快眠です。",
+  "元気な日ほど、食べすぎ注意。おなか八分目は、長生き猫の共通点です。",
+  "だれかを散歩や運動にさそうと吉。元気は、わけると倍になります。",
+  "きょうの快調さを、ひとこと記録にのこして。不調の日の、たしかなお守りになります。",
+  "体がかるい日は、こころの掃除もはかどる日。いらない心配をひとつ、ぽいっと。"]
+ ]
+};
+const WISH={
+ challenge:[
+  "「挑戦したい」その気持ちは、それだけで追い風。おおきな一歩より、爪とぎひと回ぶんの一歩からどうぞ。",
+  "あたらしいことは、はじめの5分だけ本気を出せば、あとは勝手にころがります。",
+  "きょうの挑戦は、だれにも言わずにこっそりと。芽が出てから、自慢しましょう。",
+  "失敗しても、猫は落ちたことを気にしません。着地して、毛づくろいをするだけ。",
+  "挑戦の神さまは、じゅんびが六割の者にほほえみます。完璧を待たないで。",
+  "きのうのじぶんが相手なら、きょうのあなたは、たぶん勝てます。",
+  "迷っている時間も、助走のうち。ただし助走は、きょうまでにしておきましょう。",
+  "ちいさな挑戦をひとつ済ませると、夜のごはんがおいしくなります。ほんとうです。"],
+ slow:[
+  "のんびりは、なまけではなく充電。日なたをみつけて、なにもしない時間をたっぷりと。",
+  "きょうの予定に「なにもしない」を、ひとつ書きこんでおきましょう。",
+  "いそがない、いそがない。あなたのペースが、あなたの正しい速度です。",
+  "お気に入りの飲みものを、いつもより上等なカップで。それだけで午後がかわります。",
+  "スマホを遠くの棚において、10分だけ窓の外を。猫のテレビは、いつも窓です。",
+  "ごろごろするなら、罪悪感ぬきで本格的に。中途半端が、いちばん疲れます。",
+  "きょうの夕焼けを、見のがさないこと。それが、きょういちばんの予定です。",
+  "「まあ、いっか」を口ぐせに。そのことばは、こころの日なたぼっこです。"],
+ tidy:[
+  "片づけたい日は、運気の風とおしをよくする日。ひきだしひとつぶんで、じゅうぶん効きます。",
+  "迷ったら「一年つかっていないもの」から。それはもう、旅立ちたがっています。",
+  "片づけは、ぜんぶやらないのがコツ。タイマー15分、鳴ったらおしまい。",
+  "きれいになった場所を、ひとつだけ写真に。あしたのやる気の、餌になります。",
+  "紙のたまり場（郵便・レシート）から手をつけると、いちばん効きめがはやい。",
+  "「いつか使うかも」の「いつか」は、だいたい来ません。猫は、きょうしか生きていません。",
+  "スマホの中の片づけも吉。撮りすぎた空の写真、三枚だけのこしてさよなら。",
+  "片づけのさいごは、手をあらって、あたたかいお茶を。儀式は、だいじです。"],
+ heal:[
+  "癒やされたい日は、がまんをしない日。すきな飲みものと、やわらかい毛布のご用意を。",
+  "きょうは五感を甘やかす日。いい匂い、いい音楽、あたたかい光。",
+  "泣きたければ、泣いてよい日。涙はこころの雨。降れば、晴れます。",
+  "猫の動画は三本まで許可します。四本目からは、お布団の中でどうぞ。",
+  "だれかにもらったやさしさを思い出して、こころの棚に飾りなおす夜に。",
+  "きょうがんばったことを、みっつ数えて。「起きた」も、立派なひとつです。",
+  "あたたかいお風呂と、はやい就寝。それはもっとも古くて、もっとも効く魔法。",
+  "じぶんに「よしよし」をする日。頭をなでる手は、じぶんのでも、ちゃんと効きます。"]
+};
+const HINTS=[
+ "ポケットのなかを、いちど整理してみて。",
+ "きょうすれちがう猫は、いい知らせのつかい。",
+ "「ありがとう」を、こえに出すと運がまわる。",
+ "夜ふかしはほどほどに。運は寝てるあいだに育つ。",
+ "こまったら、空をみあげて深呼吸をみっつ。",
+ "たべものの好き嫌いをひとつ、ゆるしてあげて。",
+ "ひきだしの奥に、わすれものが眠っているかも。",
+ "遠くの友だちに、みじかい便りを。",
+ "あたらしい道で帰ると、いいものに出会える。",
+ "手をあたためると、こころもあたたまる。"
+];
+/* ================= LOGIC ================= */
+const KEY="nekomikuji";
+const SKEY="nekomikuji_streak";
+function fmtKey(d){
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function todayKey(){return fmtKey(new Date());}
+function yesterdayKey(){return fmtKey(new Date(Date.now()-86400000));}
+function dayNum(){
+  // 年初からの通し日数。日がわりローテーションに使う（連日で同じ文にならない）
+  const d=new Date();
+  return Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);
+}
+function loadStreak(){
+  try{return JSON.parse(localStorage.getItem(SKEY)||"null");}catch(e){return null;}
+}
+function bumpStreak(){
+  // 連続おまいり記録：きのうもひいていたら+1、あいだが空いたら1から
+  const s=loadStreak();
+  let n=1;
+  if(s&&s.last===todayKey())n=s.n;
+  else if(s&&s.last===yesterdayKey())n=s.n+1;
+  try{localStorage.setItem(SKEY,JSON.stringify({last:todayKey(),n:n}));}catch(e){}
+  return n;
+}
+function pickRank(r){
+  // r: 0-1 の乱数。重みにしたがって選ぶ
+  const total=RANKS.reduce((s,x)=>s+x.w,0);
+  let acc=0,v=r*total;
+  for(const x of RANKS){acc+=x.w;if(v<acc)return x;}
+  return RANKS[RANKS.length-1];
+}
+function load(){
+  try{return JSON.parse(localStorage.getItem(KEY)||"null");}catch(e){return null;}
+}
+function save(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+/* ---- 気分の5問フロー ---- */
+let mqi=0,mqAns=[];
+function startMq(){
+  mqi=0;mqAns=[];
+  document.getElementById("draw-view").classList.add("hidden");
+  document.getElementById("mq-view").classList.remove("hidden");
+  renderMq();
+}
+function renderMq(){
+  const q=MQ[mqi];
+  document.getElementById("mq-dots").innerHTML=MQ.map((_,i)=>'<i class="'+(i<=mqi?'on':'')+'"></i>').join("");
+  document.getElementById("mq-num").textContent="といかけ "+(mqi+1)+" / "+MQ.length;
+  document.getElementById("mq-text").textContent=q.t;
+  const box=document.getElementById("mq-opts");box.innerHTML="";
+  q.o.forEach(o=>{
+    const btn=document.createElement("button");
+    btn.className="mq-opt";btn.textContent=o[0];
+    btn.onclick=()=>{mqAns[mqi]=o[1];mqi++;mqi<MQ.length?renderMq():finishMq();};
+    box.appendChild(btn);
+  });
+}
+function moodOf(ans){
+  const pts=(ans[0]||0)+(ans[1]||0)+(ans[2]||0);      // 0-9
+  const lv=pts>=7?2:pts>=4?1:0;                        // 0お疲れ/1ふつう/2げんき
+  return {lv:lv,topic:ans[3]||"work",wish:ans[4]||"slow"};
+}
+function finishMq(){
+  document.getElementById("mq-view").classList.add("hidden");
+  document.getElementById("draw-view").classList.remove("hidden");
+  document.getElementById("draw-note").innerHTML="なるほど、なるほど。<br>それでは、あなたのための一本を…";
+  draw(moodOf(mqAns));
+}
+function draw(mood){
+  const btn=document.getElementById("draw-btn");
+  btn.disabled=true;btn.textContent="ふっています…";
+  document.getElementById("box").classList.add("shaking");
+  setTimeout(()=>{
+    const rank=pickRank(Math.random());
+    const o={date:todayKey(),k:rank.k,
+      item:ITEMS[Math.floor(Math.random()*ITEMS.length)],
+      color:COLORS[Math.floor(Math.random()*COLORS.length)],
+      hint:HINTS[Math.floor(Math.random()*HINTS.length)],
+      mood:mood||null,
+      streak:bumpStreak()};
+    save(o);
+    showResult(o);
+  },1400);
+}
+function showResult(o){
+  const rank=RANKS.find(x=>x.k===o.k)||RANKS[4];
+  document.getElementById("draw-view").classList.add("hidden");
+  document.getElementById("result-view").classList.remove("hidden");
+  document.getElementById("r-date").textContent=o.date.replace(/-/g,".")+" のおみくじ";
+  document.getElementById("r-img").src="../assets/img/rank_"+rank.k+".webp";
+  document.getElementById("r-rank").textContent=rank.name;
+  document.getElementById("r-read").textContent=rank.read;
+  document.getElementById("r-msg").textContent=rank.msg;
+  const mb=document.getElementById("r-mood");
+  if(o.mood&&ADVICE[o.mood.topic]){
+    // 日づけで8パターンをローテーション（あしたは必ずちがう文にあたる）
+    const adv=ADVICE[o.mood.topic][o.mood.lv];
+    const ws=WISH[o.mood.wish]||WISH.slow;
+    mb.classList.remove("hidden");
+    mb.innerHTML="<b>きょうのこころ模様 ── "+MOOD_LABELS[o.mood.lv]+"</b>"
+      +adv[dayNum()%adv.length]+"<br>"+ws[(dayNum()*5+3)%ws.length];
+  }else{mb.classList.add("hidden");}
+  document.getElementById("r-word").textContent=rank.word;
+  document.getElementById("r-item").textContent=o.item;
+  document.getElementById("r-color").textContent=o.color;
+  document.getElementById("r-hint").textContent=o.hint;
+  const n=o.streak||(loadStreak()&&loadStreak().last===todayKey()?loadStreak().n:1);
+  document.getElementById("r-streak").textContent=
+    n<=1?"きょうがはじめの一歩。ようこそ、おまいりの道へ。":"連続"+n+"日目。猫たちもよろこんでいます。";
+  document.getElementById("r-again").textContent=
+    "あしたもひくと、連続"+(n+1)+"日目に。よい一日を。";
+  const url=location.origin+location.pathname;
+  const text="今日のねこおみくじは『"+rank.name+"』でした🐾"+(n>=3?"（連続"+n+"日目のおまいり）":"")+" #ねこおみくじ #ねこよみ堂";
+  document.getElementById("r-share").innerHTML=
+   '<a href="https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url)+'" target="_blank" rel="noopener">𝕏 でシェア</a>'
+   +'<a class="line" href="https://social-plugins.line.me/lineit/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text)+'" target="_blank" rel="noopener">LINEで送る</a>';
+}
+/* ================= BOOT ================= */
+(function(){
+  const saved=load();
+  if(saved&&saved.date===todayKey()&&RANKS.find(x=>x.k===saved.k)){
+    showResult(saved);
+  }
+})();
+</script>
+</body>
+<!-- NEKOYOMIDO omikuji v1.0 -->
+</html>

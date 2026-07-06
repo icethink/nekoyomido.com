@@ -1,7 +1,11 @@
 @echo off
+chcp 65001 >nul
 rem ===== nekoyomido.com : GitHub push script =====
 rem This script initializes git (first run only) and pushes to GitHub.
 cd /d "%~dp0"
+
+rem -- use the specified SSH key --
+set GIT_SSH_COMMAND=ssh -i C:/Users/kenic/OneDrive/ドキュメント/.ssh/いつものKey.key -o IdentitiesOnly=yes
 
 git --version >nul 2>&1
 if errorlevel 1 (
